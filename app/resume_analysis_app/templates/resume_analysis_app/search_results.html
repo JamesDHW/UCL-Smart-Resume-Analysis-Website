@@ -1,0 +1,38 @@
+{% extends 'resume_analysis_app/site_frame.html' %}
+{% block content %}
+
+    {% if jobs %}
+        <div class="container box">
+            <div class="row">
+                <h1>Search Results for "{{search}}"</h1>
+            </div>
+        </div>
+    {% else %}
+        <div class="container box">
+            <div class="row">
+                <h1>No Results Found for "{{search}}"</h1>
+            </div>
+        </div>
+    {% endif%}
+
+    <br>
+    {% for job in jobs %}
+        <div class="container box">
+            <div class="row">
+                <div class="col">
+                    <h3>{{job.title}}</h3>
+                    <h5>£{{job.salary}} - {{job.location}}</h5>
+                    <div class="row">
+                    </div>
+                </div>
+                <div style="display:flex; margin:auto">
+                    <form method="get" action="{% url 'job_view' %}">
+                        <button type="submit" name="id" value="{{job.id}}">View Details</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+
+{% endblock %}

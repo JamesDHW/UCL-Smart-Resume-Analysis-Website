@@ -1,0 +1,92 @@
+{% extends 'resume_analysis_app/site_frame.html' %}
+{% block content %}
+
+
+    {% if applicant %}
+        <div class="container box">
+            <div class="row">
+                <h1>Applicant Dashboard</h1>
+            </div>
+            <div class="row">
+                <h3>{{ applicant }}</h3>
+            </div>
+        </div>
+        <div class="container box">
+            <div class="row">
+                <h2>Insights</h2>
+            </div>
+            <h5>Matching keywords:</h5>
+            <div class="row">
+                {% for kw in matches %}
+                    {{ kw }},
+                {% empty %}
+                    No Matches
+                {% endfor %}
+            </div>
+            <h5>Resume keywords:</h5>
+            <div class="row">
+                {% for kw in applicant.applicant.keywords %}
+                    {{ kw }},
+                {% endfor %}
+            </div>
+        </div>
+        <div class="container box">
+            <div class="row">
+                <h2>Personality Analysis</h2>
+            </div>
+        </div>
+    {% else %}
+        <div class="container box">
+            <div class="row">
+                <h1>Applicant Dashboard</h1>
+            </div>
+            <div class="row">
+                <h3>{{ job.title }}</h3>
+            </div>
+        </div>
+        <div class="container box">
+            <div class="row">
+                <div class="col-3">
+                    <h4>Salary:</h4>
+                </div>
+                <div class="col">
+                    <h4>£{{job.salary}}</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <h4>Location:</h4>
+                </div>
+                <div class="col">
+                    <h4>{{job.location}}</h4>
+                </div>
+            </div>
+
+        </div>
+        <div class="container box">
+            <div class="row" style="justify-content: left !important"><p>Description:</p></div>
+            <div class="row" style="justify-content: left !important"><p>{{job.description_func}}</p></div>
+            <div class="row" style="justify-content: left !important"><p>{{job.description_non_func}}</p></div>
+        </div>
+        <div class="container box">
+            <div class="row" style="justify-content: left !important">
+                <p>Functional Requirement Keywords:</p>
+            </div>
+            <div class="row">
+                {% for keyword in job.keywords_func %}
+                    {{keyword}},
+                {% endfor %}
+            </div><br>
+            <div class="row" style="justify-content: left !important">
+                <p>Non-Functional Requirement Keywords:</p>
+            </div>
+            <div class="row">
+                {% for keyword in job.keywords_non_func %}
+                    {{keyword}},
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+
+{% endblock %}

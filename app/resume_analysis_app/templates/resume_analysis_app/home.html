@@ -1,0 +1,39 @@
+{% extends 'resume_analysis_app/site_frame.html' %}
+{% block content %}
+
+    <div class="container box">
+        <div class="row">
+            <h1>Smart Recruitment</h1>
+        </div>
+    </div>
+    <br>
+    {% if user.is_authenticated %}
+        <div class="container box" style="padding: 2%">
+            <h4>Recent Postings</h4>
+        </div>
+
+        {% for job in jobs %}
+            <div class="container box">
+                <div class="row" >
+                    <div class="col">
+                        <h3>{{job.title}}</h3>
+                        <h5>£{{job.salary}} - {{job.location}}</h5>
+                        <div class="row">
+                        </div>
+                    </div>
+                    <div style="display:flex; margin:auto">
+                        <form method="get" action="{% url 'job_view' %}">
+                            <button type="submit" name="id" value="{{job.id}}">View Details</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="container box">
+            <div class="row">
+                <h5 style="text-align:center">Welcome to Smart Recruitment - sign up and upload your CV to apply for positions!</h5>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

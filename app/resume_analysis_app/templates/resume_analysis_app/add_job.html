@@ -1,0 +1,54 @@
+{% extends 'resume_analysis_app/site_frame.html' %}
+{% block content %}
+
+    <div class="container box">
+        <div class="row">
+            {% if job %}
+                <h1>Update Job Posting</h1>
+            {% else %}
+                <h1>Add New Job Posting</h1>
+            {% endif %}
+        </div>
+    </div>
+    <br>
+    <div class="container box">
+        <form method="post" id="new_job" action="{% url 'add_job' %}">
+            {% csrf_token %}
+            <fieldset>
+                <label for="title">Job Title:</label><br>
+                <input type="text" id="title" name="title" value="{{job.title}}" style="width: 100%" required><br>
+
+                <label for="salary">Annual Salary (£):</label><br>
+                <input type="number" id="salary" name="salary" value="{{job.salary}}" style="width: 100%" required><br>
+
+                <label for="location">Location:</label><br>
+                <input type="text" id="location" name="location" value="{{job.location}}" style="width: 100%" required><br>
+
+                <label for="description_func">Functional Job Requirements (i.e. specific skills):</label><br>
+                <textarea id="description_func" rows="6" form="new_job" name="description_func" style="width: 100%" required>{{job.description_func}}</textarea>
+
+                <label for="description_non_func">Non-Functional Job Requirements (e.g. motivated, team player):</label><br>
+                <textarea id="description_non_func" rows="6" form="new_job" name="description_non_func" style="width: 100%" required>{{job.description_non_func}}</textarea>
+                <br>
+
+                {% if job %}
+                    <input type="hidden" name="update" value="true">
+                    <input type="hidden" name="id" value="{{job.id}}">
+                {% endif %}
+
+                <input type="submit" style="width: 100%; margin-top: 5%;">
+            </fieldset>
+        </form>
+        {% if job %}
+            <form method="post" action="{% url 'add_job' %}">
+                {% csrf_token %}
+                <input type="hidden" name="delete" value="true">
+                <input type="hidden" name="id" value="{{job.id}}">
+                <input type="submit" value="Delete Posting" style="width: 100%; margin-top: 5%;">
+            </form>
+        {% endif %}
+
+
+    </div>
+
+{% endblock %}

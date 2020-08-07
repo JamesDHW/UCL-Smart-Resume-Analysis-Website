@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+        <!-- My CSS -->
+        <link rel="stylesheet" type="text/css" href="{% static 'resume_analysis_app/styles.css' %}">
+        {% if title%}
+            <title>{{title}}</title>
+        {% else %}
+            <title>Smart Recruitment</title>
+        {% endif %}
+    </head>
+    <body style="background-color: #f0f0f0;">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top justify-content-center">
+            <div class="row" style="width:100%;">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="col">
+                    <a class="navbar-brand mr-4 mt-2" href="{% url 'home' %}">Smart Recruitment</a>
+                </div>
+                <form method="get" action="{% url 'search' %}" style="min-width:50%;">
+                    <div class="input-group mb-3 mt-3">
+                      <input type="text" name="search" id="search" class="form-control" placeholder="Search For Jobs..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit">Search</button>
+                      </div>
+                    </div>
+                </form>
+                <div class="navbar-collapse collapse" id="navbar">
+                    <li class="navbar-nav">
+                      <a class="nav-item nav-link" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="navbar-nav">
+                      {% if user.is_authenticated %}
+                        <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
+                        <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+                      {% else %}
+                        <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                        <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+                      {% endif %}
+                    </li>
+                  </div>
+            </div>
+        </nav>
+        <main class="container" style="min-height: 100%;">
+            <div class="row" style="flex-wrap: wrap;">
+                {% if request.path == "/dashboard/" %}
+                    <div class="col-md-3" style="margin-top: 150px; padding: 3px;">
+                        <div class="content-section box">
+                            <h3 style="text-align:center">Applicants</h3>
+                            <br>
+                            <ul class="list-group" style="width:100%">
+                                {% for application in applicants %}
+                                    {% if application.id == applicant.id %}
+                                        <form method="get" action="" style="width:100%">
+                                            <input type="hidden" name="job_id" value="{{job.id}}" />
+                                            <button style="background: #555; color: white; width:100%"
+                                                    onclick="this.parentNode.submit()"
+                                            >{{ application.username }} (X)</button>
+                                        </form>
+                                    {% else %}
+                                        <form method="get" action="" style="width:100%">
+                                            <input type="hidden" name="job_id" value="{{job.id}}" />
+                                            <input type="hidden" name="user" value="{{application.id}}" />
+                                            <button
+                                                    style="width:100%"
+                                                    onclick="this.parentNode.submit()"
+                                            >{{ application.username }}</button>
+                                        </form>
+                                    {% endif %}
+
+                                {% endfor %}
+                              </ul>
+
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="col-md-8" style="margin-top: 150px;">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        </main>
+
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </body>
+</html>

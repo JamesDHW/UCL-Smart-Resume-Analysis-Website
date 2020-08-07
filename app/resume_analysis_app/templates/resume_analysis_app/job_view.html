@@ -1,0 +1,38 @@
+{% extends 'resume_analysis_app/site_frame.html' %}
+{% block content %}
+
+    <div class="container box">
+        <h1>{{job.title}}</h1>
+    </div>
+    <br>
+    <div class="container box">
+        <div class="row">
+            <div class="col-3">
+                <h4>Salary:</h4>
+            </div>
+            <div class="col">
+                <h4>£{{job.salary}}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <h4>Location:</h4>
+            </div>
+            <div class="col">
+                <h4>{{job.location}}</h4>
+            </div>
+        </div>
+
+    </div>
+    <div class="container box">
+        <div class="row" style="justify-content: left !important"><p>Description:</p></div>
+        <div class="row" style="justify-content: left !important"><p>{{job.description_func}}</p></div>
+        <div class="row" style="justify-content: left !important"><p>{{job.description_non_func}}</p></div>
+    </div>
+    <div class="container box">
+        <form method="get" action="">
+            <input type="hidden" name="id" value="{{job.id}}" />
+            <button type="submit" name="apply" value="1" style="width:100%;">One Click Application</button>
+        </form>
+    </div>
+{% endblock %}
