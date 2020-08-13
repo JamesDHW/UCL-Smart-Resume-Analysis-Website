@@ -1,4 +1,4 @@
-{% extends 'resume_analysis_app/site_frame.html' %}
+{% extends 'resume_analysis_app/_site_frame.html' %}
 {% block content %}
 
     <div class="container box">
@@ -7,7 +7,17 @@
     <br>
     <div class="container box">
         <div class="row">
-            <div class="col-3">
+            <div class="col-4">
+                <h4>Organisation:</h4>
+            </div>
+            <div class="col">
+                <a href="{% url 'organisation_view' %}?id={{job.organisation.id}}">
+                    <h3>{{job.organisation}}</h3>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
                 <h4>Salary:</h4>
             </div>
             <div class="col">
@@ -15,7 +25,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-3">
+            <div class="col-4">
                 <h4>Location:</h4>
             </div>
             <div class="col">
@@ -30,6 +40,13 @@
         <div class="row" style="justify-content: left !important"><p>{{job.description_non_func}}</p></div>
     </div>
     <div class="container box">
+        {% if user.account.organisation == job.organisation %}
+            <form method="get" action="">
+                <input type="hidden" name="id" value="{{job.id}}" />
+                <button type="submit" name="position" value="1" style="width:100%;">This is my position at {{job.organisation}}</button>
+            </form>
+            <br>
+        {% endif %}
         <form method="get" action="">
             <input type="hidden" name="id" value="{{job.id}}" />
             <button type="submit" name="apply" value="1" style="width:100%;">One Click Application</button>

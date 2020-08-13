@@ -1,18 +1,24 @@
-{% extends 'resume_analysis_app/site_frame.html' %}
+{% extends 'resume_analysis_app/_site_frame.html' %}
 {% block content %}
 
     <div class="container box">
         <div class="row">
             <h1>{{ user.username }}</h1>
         </div>
+        <div class="row">
+            <h5>{{ user.email }}</h5>
+        </div>
     </div>
     <br>
+    <div class="container box" style="padding: 2%">
+        <h4>To Apply For Positions</h4>
+    </div>
 
     <div class="container box">
-        <h4>Email: {{ user.email }}</h4>
-        <br>
-        <h6>Upload My Resume To Apply To Jobs:</h6>
-        <p>(Current File: {{ user.applicant.filename }})</p>
+        <div class="row" style="display:block">
+            <h6>Upload My Resume</h6>
+        </div>
+        <p>(Current File: {{ user.account.filename }})</p>
         <form method="post" enctype="multipart/form-data" style="width:100%">
             {% csrf_token %}
             <div class="row">
@@ -20,45 +26,18 @@
                     <input type="file" name="cv">
                 </div>
                 <div class="col-2">
-                    <input type="submit">
+                    <input type="submit" value="Upload">
                 </div>
             </div>
         </form>
-    </div>
-    <br>
-    <div class="container box" style="padding: 2%">
-        <h4>My Posted Positions</h4>
-    </div>
-    {% for job in jobs %}
-        <div class="container box">
-            <div class="row">
-                <div class="col">
-                    <h3>{{job.title}}</h3>
-                    <h5>£{{job.salary}} - {{job.location}}</h5>
-                    <div class="row">
-                    </div>
-                </div>
-                <div class="col-4" style="text-align: right !important">
-                    <form method="get" action="{% url 'job_view' %}">
-                        <button type="submit" name="id" value="{{job.id}}" style="width: 100%">View Details</button>
-                    </form>
-                    <form method="get" action="{% url 'dash' %}">
-                        <button type="submit" name="job_id" value="{{job.id}}" style="width: 100%">See Applicants</button>
-                    </form>
-                    <form method="post" action="{% url 'add_job' %}">
-                        {% csrf_token %}
-                        <button type="submit" name="id" value="{{job.id}}" style="width: 100%">Update Posting</button>
-                    </form>
-                </div>
-            </div>
+        <br><br>
+        <div class="row" style="display:block">
+            <h6>Let Us Get To Know More About You...</h6>
+            <br>
         </div>
-    {% endfor %}
-    <div class="container box">
-        <div class="row">
-            <form method="get" action="{% url 'add_job' %}" style="width: 100%;">
-                <button type="submit" style="width: 100%;">Add New Posting</button>
-            </form>
-        </div>
+        <form method="get" action="{% url 'interview' %}" style="width: 100%;">
+            <button type="submit" style="width: 100%;">Go To Questions</button>
+        </form>
     </div>
 
 {% endblock %}

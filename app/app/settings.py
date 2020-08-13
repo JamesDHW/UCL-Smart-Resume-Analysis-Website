@@ -32,7 +32,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'resume_analysis_app.apps.ResumeAnalysisConfig',
-    'user_control.apps.UserControlConfig',
     'crispy_forms',
     'django_cleanup.apps.CleanupConfig',
     'django.contrib.admin',

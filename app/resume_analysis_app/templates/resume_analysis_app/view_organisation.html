@@ -1,0 +1,44 @@
+{% extends 'resume_analysis_app/_site_frame.html' %}
+{% block content %}
+
+    <div class="container box">
+        <h1>{{organisation.name}}</h1>
+    </div>
+    <div class="container box" style="padding: 3%; text-align: justify;">
+        <h6>{{organisation.company_description}}</h6>
+    </div>
+    <br>
+    <div class="container box" style="padding: 2%">
+        <h4>Positions at {{organisation.name}}</h4>
+        <form method="get" style="min-width:50%;">
+            <div class="input-group mb-3 mt-3">
+              <input type="hidden" value="{{organisation.id}}" name="id">
+              <input type="text" name="search" class="form-control" placeholder="Search positions at {{organisation.name}}...">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit">Search</button>
+              </div>
+            </div>
+        </form>
+    </div>
+    {% for job in jobs %}
+        <div class="container box">
+            <div class="row">
+                <div class="col">
+                    <a href="{% url 'job_view' %}?id={{job.id}}"><h3>{{job.title}}</h3></a>
+                    <h5>£{{job.salary}} - {{job.location}}</h5>
+                </div>
+                {% if job.author == user %}
+                    <div class="col-4" style="text-align: right !important">
+                        <form method="get" action="{% url 'dash' %}">
+                            <button type="submit" name="job_id" value="{{job.id}}" style="width: 100%">See Applicants</button>
+                        </form>
+                        <form method="post" action="{% url 'add_job' %}">
+                            {% csrf_token %}
+                            <button type="submit" name="id" value="{{job.id}}" style="width: 100%">Update Position</button>
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

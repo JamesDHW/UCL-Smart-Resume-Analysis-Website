@@ -1,0 +1,23 @@
+{% extends 'resume_analysis_app/_site_frame.html' %}
+{% block content %}
+    <div class="container box">
+        <div class="row">
+            <h1>Pre-Interview Questions</h1>
+        </div>
+    </div>
+    <form method="post" id="interview">
+        {% csrf_token %}
+        {% for question in questions %}
+            <div class="container box">
+                <div class="row" style="display: block">
+                    <h4>{{question.title}}</h4>
+                </div>
+                <textarea id="{{question.title}}" rows="6" form="interview" name="{{question.title}}" style="width: 100%" required></textarea>
+            </div>
+        {% endfor %}
+
+        <div class="container box">
+            <input type="submit" style="width: 100%">
+        </div>
+    </form>
+{% endblock %}

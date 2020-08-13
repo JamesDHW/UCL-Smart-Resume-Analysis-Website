@@ -1,4 +1,4 @@
-{% extends 'resume_analysis_app/site_frame.html' %}
+{% extends 'resume_analysis_app/_site_frame.html' %}
 {% block content %}
 
 
@@ -33,6 +33,13 @@
         <div class="container box">
             <div class="row">
                 <h2>Personality Analysis</h2>
+            </div>
+            <div class="row">
+                {% if fig %}
+                    {% autoescape off %}
+                        {{ fig }}
+                    {% endautoescape %}
+                {% endif %}
             </div>
         </div>
     {% else %}

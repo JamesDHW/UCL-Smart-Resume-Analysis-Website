@@ -1,0 +1,49 @@
+{% extends 'resume_analysis_app/_site_frame.html' %}
+{% block content %}
+
+    <div class="container box">
+        <div class="row">
+            {% if organisation %}
+                <h1>Update Organisation</h1>
+            {% else %}
+                <h1>Add New Organisation</h1>
+            {% endif %}
+        </div>
+    </div>
+    <br>
+    <div class="container box">
+        <form method="post" id="new_organisation">
+            {% csrf_token %}
+            <fieldset>
+                <input type="hidden" name="owner" value="{{user}}">
+
+                <label for="title">Organisation Name:</label><br>
+                <input type="text" id="title" name="title" value="{{organisation.name}}" style="width: 100%" required><br>
+
+                <label for="salary">Corporate Email Extension (e.g. uk.ibm.com):</label><br>
+                <input type="number" id="salary" name="salary" value="{{organisation.email_extension}}" style="width: 100%" required><br>
+
+                <label for="description">Company Description (i.e. specific skills):</label><br>
+                <textarea id="description" rows="6" form="new_organisation" name="description" style="width: 100%" required>{{organisation.company_description}}</textarea>
+                <br>
+
+                {% if organisation %}
+                    <input type="hidden" name="update" value="true">
+                    <input type="hidden" name="id" value="{{job.id}}">
+                {% endif %}
+
+                <input type="submit" style="width: 100%; margin-top: 5%;">
+            </fieldset>
+        </form>
+        {% if job %}
+            <form method="post" action="{% url 'add_job' %}">
+                {% csrf_token %}
+                <input type="hidden" name="delete" value="true">
+                <input type="hidden" name="id" value="{{job.id}}">
+                <input type="submit" value="Delete Posting" style="width: 100%; margin-top: 5%;">
+            </form>
+        {% endif %}
+
+    </div>
+
+{% endblock %}

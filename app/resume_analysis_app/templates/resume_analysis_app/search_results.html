@@ -1,7 +1,7 @@
-{% extends 'resume_analysis_app/site_frame.html' %}
+{% extends 'resume_analysis_app/_site_frame.html' %}
 {% block content %}
 
-    {% if jobs %}
+    {% if jobs or organisations %}
         <div class="container box">
             <div class="row">
                 <h1>Search Results for "{{search}}"</h1>
@@ -16,19 +16,39 @@
     {% endif%}
 
     <br>
+    {% if organisations %}
+        <div class="container box" style="padding:2%">
+            <h4>Organisations</h4>
+        </div>
+    {% endif%}
+    {% for organisation in organisations %}
+        <div class="container box">
+            <div class="row">
+                <div class="col">
+                    <a href="{% url 'organisation_view' %}?id={{organisation.id}}">
+                        <h3>{{organisation.name}}</h3>
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <br>
+    {% if jobs %}
+        <div class="container box" style="padding:2%">
+            <h4>Positions</h4>
+        </div>
+    {% endif%}
     {% for job in jobs %}
         <div class="container box">
             <div class="row">
                 <div class="col">
-                    <h3>{{job.title}}</h3>
+                    <a href="{% url 'job_view' %}?id={{job.id}}"><h3>{{job.title}}</h3></a>
                     <h5>£{{job.salary}} - {{job.location}}</h5>
-                    <div class="row">
-                    </div>
                 </div>
-                <div style="display:flex; margin:auto">
-                    <form method="get" action="{% url 'job_view' %}">
-                        <button type="submit" name="id" value="{{job.id}}">View Details</button>
-                    </form>
+                <div class="col" style="text-align: right !important">
+                    <a href="{% url 'organisation_view' %}?id={{job.organisation.id}}">
+                        <h3>{{job.organisation}}</h3>
+                    </a>
                 </div>
             </div>
         </div>

@@ -1,4 +1,4 @@
-{% extends 'resume_analysis_app/site_frame.html' %}
+{% extends 'resume_analysis_app/_site_frame.html' %}
 {% block content %}
 
     <div class="container box">
@@ -12,7 +12,7 @@
     </div>
     <br>
     <div class="container box">
-        <form method="post" id="new_job" action="{% url 'add_job' %}">
+        <form method="post" id="new_job">
             {% csrf_token %}
             <fieldset>
                 <label for="title">Job Title:</label><br>
@@ -40,7 +40,7 @@
             </fieldset>
         </form>
         {% if job %}
-            <form method="post" action="{% url 'add_job' %}">
+            <form method="post">
                 {% csrf_token %}
                 <input type="hidden" name="delete" value="true">
                 <input type="hidden" name="id" value="{{job.id}}">

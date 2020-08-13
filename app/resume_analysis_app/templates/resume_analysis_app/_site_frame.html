@@ -7,7 +7,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
         <!-- My CSS -->
         <link rel="stylesheet" type="text/css" href="{% static 'resume_analysis_app/styles.css' %}">
@@ -28,7 +29,7 @@
                 </div>
                 <form method="get" action="{% url 'search' %}" style="min-width:50%;">
                     <div class="input-group mb-3 mt-3">
-                      <input type="text" name="search" id="search" class="form-control" placeholder="Search For Jobs..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                      <input type="text" name="search" class="form-control" placeholder="Search For Jobs Or Organisations...">
                       <div class="input-group-append">
                         <button class="btn btn-outline-secondary" type="submit">Search</button>
                       </div>
@@ -52,6 +53,7 @@
         </nav>
         <main class="container" style="min-height: 100%;">
             <div class="row" style="flex-wrap: wrap;">
+                <!-- Sidebar to show Applicants on Applicant Dashboard-->
                 {% if request.path == "/dashboard/" %}
                     <div class="col-md-3" style="margin-top: 150px; padding: 3px;">
                         <div class="content-section box">
@@ -70,19 +72,17 @@
                                         <form method="get" action="" style="width:100%">
                                             <input type="hidden" name="job_id" value="{{job.id}}" />
                                             <input type="hidden" name="user" value="{{application.id}}" />
-                                            <button
-                                                    style="width:100%"
+                                            <button style="width:100%"
                                                     onclick="this.parentNode.submit()"
                                             >{{ application.username }}</button>
                                         </form>
                                     {% endif %}
-
                                 {% endfor %}
                               </ul>
-
                         </div>
                     </div>
                 {% endif %}
+                <!-- Main Content -->
                 <div class="col-md-8" style="margin-top: 150px;">
                     {% if messages %}
                         {% for message in messages %}
@@ -93,6 +93,29 @@
                     {% endif %}
                     {% block content %}{% endblock %}
                 </div>
+                <!-- Sidebar to Show the Organisation Users Belong to-->
+                {% if request.path == "/profile/" and user.account.organisation %}
+                    <div class="col-md-4" style="margin-top: 150px; padding: 3px;">
+                        <div class="content-section box">
+                            <h3 style="text-align: center">Current Position</h3>
+                            <br>
+                            {% if user.account.job %}
+                                <div class="col">
+                                    <a href="{% url 'job_view' %}?id={{user.account.job.id}}"><h5>{{user.account.job.title}}</h5></a>
+                                    <h6>£{{user.account.job.salary}} - {{user.account.job.location}}</h6>
+                                </div>
+                            {% else %}
+                                <p>No Position Found</p>
+                            {% endif %}
+                            <br><br>
+                            <a href="{% url 'organisation_view' %}?id={{user.account.organisation.id}}">
+                                <h3 style="text-align: center">{{user.account.organisation}}</h3>
+                            </a>
+                            <br>
+                            <p style="text-align:justify">{{user.account.organisation.company_description}}</p>
+                        </div>
+                    </div>
+                {% endif %}
             </div>
         <br>
         <br>
@@ -103,8 +126,11 @@
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
     </body>
 </html>

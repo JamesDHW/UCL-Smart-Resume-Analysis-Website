@@ -1,4 +1,4 @@
-{% extends 'resume_analysis_app/site_frame.html' %}
+{% extends 'resume_analysis_app/_site_frame.html' %}
 {% block content %}
 
     <div class="container box">
@@ -7,33 +7,32 @@
         </div>
     </div>
     <br>
-    {% if user.is_authenticated %}
-        <div class="container box" style="padding: 2%">
-            <h4>Recent Postings</h4>
+    {% if not user.is_authenticated %}
+    <div class="container box">
+        <div class="row">
+            <h5 style="text-align:center">Welcome to Smart Recruitment!</h5>
+            <h5 style="text-align:center">Remember to sign up and upload your CV to apply for positions.</h5>
         </div>
-
-        {% for job in jobs %}
-            <div class="container box">
-                <div class="row" >
-                    <div class="col">
-                        <h3>{{job.title}}</h3>
-                        <h5>£{{job.salary}} - {{job.location}}</h5>
-                        <div class="row">
-                        </div>
-                    </div>
-                    <div style="display:flex; margin:auto">
-                        <form method="get" action="{% url 'job_view' %}">
-                            <button type="submit" name="id" value="{{job.id}}">View Details</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
-    {% else %}
-        <div class="container box">
-            <div class="row">
-                <h5 style="text-align:center">Welcome to Smart Recruitment - sign up and upload your CV to apply for positions!</h5>
-            </div>
-        </div>
+    </div>
+    <br>
     {% endif %}
+    <div class="container box" style="padding: 2%">
+        <h4>Recent Postings</h4>
+    </div>
+
+    {% for job in jobs %}
+    <div class="container box">
+        <div class="row">
+            <div class="col">
+                <a href="{% url 'job_view' %}?id={{job.id}}"><h3>{{job.title}}</h3></a>
+                <h5>£{{job.salary}} - {{job.location}}</h5>
+            </div>
+            <div class="col" style="text-align: right !important">
+                <a href="{% url 'organisation_view' %}?id={{job.organisation.id}}">
+                    <h3>{{job.organisation}}</h3>
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
 {% endblock %}
