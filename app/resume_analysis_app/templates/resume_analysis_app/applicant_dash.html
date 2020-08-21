@@ -7,89 +7,195 @@
             <div class="row">
                 <h1>Applicant Dashboard</h1>
             </div>
-            <div class="row">
-                <h3>{{ applicant }}</h3>
-            </div>
         </div>
         <div class="container box">
             <div class="row">
-                <h2>Insights</h2>
+                <div class="col-3" style="font-weight:bold; margin:0px;">
+                    Username:
+                </div>
+                <div class="col">
+                    {{ applicant }}
+                </div>
             </div>
-            <h5>Matching keywords:</h5>
             <div class="row">
+                <div class="col-3" style="font-weight:bold; margin:0px;">
+                    Email:
+                </div>
+                <div class="col">
+                    {{ applicant.email }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3" style="font-weight:bold; margin:0px;">
+                    Resume:
+                </div>
+                <div class="col">
+                    <a  href="{{ applicant.account.resume.url }}" download> Download Document </a>
+                </div>
+            </div>
+            <br>
+            {% for qual in applicant.account.education %}
+                <div class="row">
+                    <div class="col-3" style="font-weight:bold; margin:0px;">
+                        Qualification:
+                    </div>
+                    <div class="col">
+                        <p style="font-weight:bold; margin:0px;">{{qual.institution}}:</p>
+                        <p>{{qual.qualification}}, {{qual.grade}}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div><br>
+        <div class="container box">
+            <div class="row">
+                <h3>Resume Analysis</h3>
+            </div>
+            <div class="row" style="display:block"><h5>Matching keywords:</h5></div>
+            <div class="col" style="display:block">
                 {% for kw in matches %}
                     {{ kw }},
                 {% empty %}
                     No Matches
                 {% endfor %}
-            </div>
-            <h5>Resume keywords:</h5>
-            <div class="row">
-                {% for kw in applicant.applicant.keywords %}
+            </div><br>
+            <div class="row" style="display:block"><h5>Prevalent keywords:</h5></div>
+            <div class="col">
+                {% for kw in applicant.account.keywords %}
                     {{ kw }},
                 {% endfor %}
-            </div>
-        </div>
+            </div><br>
+            <div class="row" style="display:block"><h5>Resume Concepts:</h5></div>
+                {% for conc, li in applicant.account.concepts %}
+                <div class="row" style="display: inline-block; outline-style: solid; outline-width: 1px; margin: 5px; padding:5px; background:#eee">
+                    <a href="{{ li }}">{{ conc }}</a>
+                </div>
+                {% endfor %}
+        </div> <br>
         <div class="container box">
             <div class="row">
-                <h2>Personality Analysis</h2>
+                <h3>Personality Analysis</h3>
             </div>
-            <div class="row">
-                {% if fig %}
-                    {% autoescape off %}
-                        {{ fig }}
-                    {% endautoescape %}
-                {% endif %}
+            {% if fig %}
+                {% autoescape off %}
+                {{ fig }}
+                {% endautoescape %}
+            {% else %}
+                Applicant hasn't yet responded to interview questions.
+            {% endif %}
+        </div> <br>
+        {% if questions %}
+            <div class="box container">
+                <div class="row">
+                    <h3>Question Response Breakdowns</h3>
+                </div>
             </div>
-        </div>
+            {% for question, tones in questions %}
+                <div class="container box" style="padding:2%;">
+                    <div class="row">
+                        <h4>{{ question.question }}</h4>
+                    </div>
+                    <div class="row">
+                        {% for tone_type in tones %}
+                            {% for tone in tone_type.tones %}
+                                <div class="col">
+                                    <div class="progress justify-content-start">
+                                        <div class="progress-bar" role="progressbar" style="width: {% widthratio tone.score 1 100 %}%">
+                                            {{ tone.tone_name }}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                    <div class="row">
+                        <p style="margin:20px">{{ question.response }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="box container">
+                <div class="row">
+                    <h5>No Questions Answered</h5>
+                </div>
+            </div> <br>
+        {% endif %}
     {% else %}
         <div class="container box">
             <div class="row">
                 <h1>Applicant Dashboard</h1>
             </div>
-            <div class="row">
-                <h3>{{ job.title }}</h3>
-            </div>
         </div>
         <div class="container box">
             <div class="row">
                 <div class="col-3">
-                    <h4>Salary:</h4>
+                    <h5>Position Title:</h5>
                 </div>
                 <div class="col">
-                    <h4>£{{job.salary}}</h4>
+                    <h5>{{job.title}}</h5>
                 </div>
             </div>
             <div class="row">
                 <div class="col-3">
-                    <h4>Location:</h4>
+                    <h5>Salary:</h5>
                 </div>
                 <div class="col">
-                    <h4>{{job.location}}</h4>
+                    <h5>£{{job.salary}}</h5>
                 </div>
             </div>
-
-        </div>
-        <div class="container box">
-            <div class="row" style="justify-content: left !important"><p>Description:</p></div>
+            <div class="row">
+                <div class="col-3">
+                    <h5>Location:</h5>
+                </div>
+                <div class="col">
+                    <h5>{{job.location}}</h5>
+                </div>
+            </div> <br>
+            <div class="row" style="justify-content: left !important"><h5>Description:</h5></div>
             <div class="row" style="justify-content: left !important"><p>{{job.description_func}}</p></div>
             <div class="row" style="justify-content: left !important"><p>{{job.description_non_func}}</p></div>
         </div>
         <div class="container box">
-            <div class="row" style="justify-content: left !important">
-                <p>Functional Requirement Keywords:</p>
-            </div>
             <div class="row">
-                {% for keyword in job.keywords_func %}
-                    {{keyword}},
+                <h3>Position Analysis</h3>
+            </div>
+            <br>
+            <div class="row" style="display:block">
+                <div class="col">
+                    <h5>Position Concepts:</h5>
+                </div>
+            </div>
+            <div class="row mb-4">
+                {% for conc, li in job.concepts %}
+                    <div class="d-flex flex-md-row">
+                        <div class="row" style="outline-style: solid; outline-width: 1px; margin: 5px; padding:5px; background:#eee">
+                            <a href="{{ li }}">{{ conc }}</a>
+                            <a href="?job_id={{job.id}}&remove_con={{conc}}" onclick="this.parentNode.submit()" style="margin-left:10px">X</a>
+                        </div>
+                    </div>
                 {% endfor %}
-            </div><br>
-            <div class="row" style="justify-content: left !important">
-                <p>Non-Functional Requirement Keywords:</p>
             </div>
-            <div class="row">
-                {% for keyword in job.keywords_non_func %}
-                    {{keyword}},
+            <div class="row" style="justify-content: left !important">
+                <div class="col-5"><h5 style="display:flex; align-items: center; height:100%">Position Keywords:</h5></div>
+                <div class="col">
+                    <form method="get" style="min-width:100%;">
+                        <div class="input-group">
+                          <input type="text" name="add_kw" class="form-control" placeholder="Add Keyword">
+                          <input type="hidden" name="job_id" value="{{job.id}}">
+                          <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit">Add</button>
+                          </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row mt-3">
+                {% for keyword in job.keywords %}
+                    <div class="d-flex flex-md-row">
+                        <div class="row" style="outline-style: solid; outline-width: 1px; margin: 5px; padding:5px; background:#eee">
+                            {{keyword}}
+                            <a href="?job_id={{job.id}}&remove_kw={{keyword}}" onclick="this.parentNode.submit()" style="margin-left:10px">X</a>
+                        </div>
+                    </div>
                 {% endfor %}
             </div>
         </div>

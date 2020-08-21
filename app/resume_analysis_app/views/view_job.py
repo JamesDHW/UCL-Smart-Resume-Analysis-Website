@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 
 from ..models import Account, JobDescription
+from .._app_functions import update_aggregate_personality
 
 
 def job_view(request):
@@ -21,6 +22,7 @@ def job_view(request):
             account = Account.objects.get(user=request.user)
             account.job = job
             account.save()
+            update_aggregate_personality(job)
             messages.success(request, 'Your current position has been updated.')
             return redirect('profile')
     else:

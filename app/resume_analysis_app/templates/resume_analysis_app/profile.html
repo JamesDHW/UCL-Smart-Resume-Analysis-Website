@@ -11,33 +11,62 @@
     </div>
     <br>
     <div class="container box" style="padding: 2%">
-        <h4>To Apply For Positions</h4>
+        <h4>Essential Information</h4>
     </div>
 
-    <div class="container box">
-        <div class="row" style="display:block">
-            <h6>Upload My Resume</h6>
+    <div class="container">
+        <div class="row">
+            <div class="col box" style="display:block">
+                <h6 style="text-align:center">Upload My Resume</h6>
+                <p>(Current File: {{ account.filename }})</p>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col">
+                            <label for="file" class="btn mt-1 btn-outline-secondary">File</label>
+                            <input style="display:none" id="file" type="file" name="cv">
+                        </div>
+                        <div class="col-4">
+                            <input class="btn btn-outline-secondary" type="submit" value="Upload" style="margin-top:5px">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col box" style="display:block">
+                <h6 style="text-align:center">Let Us Get To Know More About You...</h6>
+                <br><br>
+                <form method="get" action="{% url 'interview' %}" style="width: 100%;">
+                    <button class="btn btn-outline-secondary" type="submit" style="width: 100%;">Complete Questions</button>
+                </form>
+            </div>
         </div>
-        <p>(Current File: {{ user.account.filename }})</p>
-        <form method="post" enctype="multipart/form-data" style="width:100%">
-            {% csrf_token %}
-            <div class="row">
-                <div class="col">
-                    <input type="file" name="cv">
+    </div>
+    <br>
+    <div class="container box" style="padding: 2%">
+        <div class="row" style="padding-right: 10px;">
+            <div class="col"><h4>My Qualifications</h4></div>
+            <div class="col-1">
+                <a href="{% url 'add_qualification' %}">Add</a>
+            </div>
+        </div>
+    </div>
+    {% if user.account.education %}
+        {% for qual in account.education %}
+            <div class="container box">
+                <div class="row" style="padding-right: 20px;">
+                    <div class="col"><h5>{{qual.institution}}</h5></div>
+                    <div class="col-1">
+                        <form method="post" action="{% url 'add_job' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="delete" value="{{qual}}">
+                            <a href="#" onclick="this.parentNode.submit();">Remove</a>
+                        </form>
+                    </div>
                 </div>
-                <div class="col-2">
-                    <input type="submit" value="Upload">
+                <div class="row" style="display:block">
+                    <div class="col"><h6>{{qual.qualification}}, {{qual.grade}}</h6></div>
                 </div>
             </div>
-        </form>
-        <br><br>
-        <div class="row" style="display:block">
-            <h6>Let Us Get To Know More About You...</h6>
-            <br>
-        </div>
-        <form method="get" action="{% url 'interview' %}" style="width: 100%;">
-            <button type="submit" style="width: 100%;">Go To Questions</button>
-        </form>
-    </div>
-
+        {% endfor %}
+    {% endif %}
 {% endblock %}

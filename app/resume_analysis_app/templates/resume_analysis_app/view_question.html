@@ -2,22 +2,28 @@
 {% block content %}
     <div class="container box">
         <div class="row">
-            <h1>Pre-Interview Questions</h1>
+            <h1>Let's Get To Know More About You...</h1>
+        </div>
+    </div>
+    <div class="container box" style="padding:5px">
+        <div class="progress justify-content-start">
+            <div class="progress-bar bg-success" role="progressbar" style="width: {{prog}}%"></div>
         </div>
     </div>
     <form method="post" id="interview">
         {% csrf_token %}
-        {% for question in questions %}
-            <div class="container box">
-                <div class="row" style="display: block">
-                    <h4>{{question.title}}</h4>
-                </div>
-                <textarea id="{{question.title}}" rows="6" form="interview" name="{{question.title}}" style="width: 100%" required></textarea>
+        <div class="container box">
+            <div class="row" style="display: block">
+                <h4>{{question.title}}</h4>
             </div>
-        {% endfor %}
+            <input type="hidden" name="question" value="{{question.title}}">
+            <textarea rows="6" form="interview" name="response" style="width: 100%" required></textarea>
+        </div>
+
+        <input type="hidden" name="responses" value="{{responses}}">
 
         <div class="container box">
-            <input type="submit" style="width: 100%">
+            <input type="submit" value="Next Question" style="width: 100%">
         </div>
     </form>
 {% endblock %}

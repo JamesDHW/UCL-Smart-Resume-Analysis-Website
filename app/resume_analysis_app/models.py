@@ -26,14 +26,25 @@ class JobDescription(models.Model):
     description_non_func = models.TextField(default="")
 
     applicants = models.ManyToManyField(User, related_name='applicants', blank=True)
-    current_employees = models.ManyToManyField(User, related_name='employees')
+    recommended = models.ManyToManyField(User, related_name='recommended', blank=True)
+    removed = models.ManyToManyField(User, related_name='removed', blank=True)
 
-    # Separate requests for keywords
-    keywords_func = models.TextField(default="")
-    keywords_non_func = models.TextField(default="")
-    # Joint request for concepts + categories
-    concepts = models.TextField(default="")
-    categories = models.TextField(default="")
+    # Insights from IBM about resume
+    keywords = models.TextField(default='{}')
+    concepts = models.TextField(default='{}')
+    category1 = models.CharField(max_length=100, default='None')
+    category2 = models.CharField(max_length=100, default='None')
+    category3 = models.CharField(max_length=100, default='None')
+
+    # Insights from IBM based on question responses
+    aggr_big5 = models.TextField(default='{}')
+    aggr_openness = models.TextField(default='{}')
+    aggr_conscien = models.TextField(default='{}')
+    aggr_agreeabl = models.TextField(default='{}')
+    aggr_extraver = models.TextField(default='{}')
+    aggr_em_range = models.TextField(default='{}')
+    needs = models.TextField(default='{}')
+    values = models.TextField(default='{}')
 
     def __str__(self):
         return self.title
@@ -43,15 +54,28 @@ class Account(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     organisation = models.ForeignKey(Organisation, on_delete=models.CASCADE, blank=True, null=True, related_name='account_org')
     job = models.ForeignKey(JobDescription, on_delete=models.CASCADE, blank=True, null=True, related_name='job')
+    education = models.TextField(default='[]')
 
     resume = models.FileField(default='resumes/_.pdf', upload_to='resumes')
     filename = models.CharField(max_length=50, default='my_resume.pdf')
     resume_plain_text = models.TextField(default="")
 
-    keywords = models.TextField(default="")
-    concepts = models.TextField(default="")
-    categories = models.TextField(default="")
-    personality = models.TextField(default="")
+    # Insights from IBM about resume
+    keywords = models.TextField(default='{}')
+    concepts = models.TextField(default='{}')
+    category1 = models.CharField(max_length=100, default='None')
+    category2 = models.CharField(max_length=100, default='None')
+    category3 = models.CharField(max_length=100, default='None')
+
+    # Insights from IBM based on question responses
+    pers_big5 = models.TextField(default='{}')
+    pers_openness = models.TextField(default='{}')
+    pers_conscien = models.TextField(default='{}')
+    pers_agreeabl = models.TextField(default='{}')
+    pers_extraver = models.TextField(default='{}')
+    pers_em_range = models.TextField(default='{}')
+    needs = models.TextField(default='{}')
+    values = models.TextField(default='{}')
 
     def __str__(self):
         return self.user.username
@@ -68,7 +92,8 @@ class QuestionResponse(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     response = models.TextField(default="")
-    tones = models.TextField(default="")
+    language_tones = models.TextField(default="")
+    social_tones = models.TextField(default="")
 
     def __str__(self):
         return self.user.username + " : " + self.question.title

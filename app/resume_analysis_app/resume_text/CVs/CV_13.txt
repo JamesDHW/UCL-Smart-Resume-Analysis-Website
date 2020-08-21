@@ -1,0 +1,51 @@
+NAME
+EMAIL
+
+Professional Profile
+
+I am a very organised and punctual worker. I always take time to ensure that my work
+is exemplary in every way; nothing less than perfection is good enough for the work
+that I produce. If I gain a position within this sector, I hope to add value by
+exploring all aspects of a situation.
+
+Education
+Bachelor of Science in Physical Therapy, University of St Andrews
+
+Work Experience
+
+IBM, Javascript developer
+- Worked with Angular and React frameworks.
+- Programmed back-end with Node JS.
+- Continuous Integration (CI).
+
+
+Small Museum, Creative Director
+- Created unique learning experiences.
+- Organised a team of ten people.
+- Was organised and punctual.
+
+
+Small factory, Quality Controller
+- Managed the floor, leading ten people.
+- Punctual, attentive and observant.
+- High standard.
+
+Skills
+
+iOS
+- Experience in Swift and Object Oriented C.
+- Published a game to the app store.
+- Worked in XCode.
+
+
+Python
+- Developed back-end with Django and Flask.
+- Machine learning projects with Neural Networks.
+- Analytical projects.
+
+
+Fluent in Mandarin
+- Learned Mandarin at A-level.
+- Worked in China for three years.
+- Worked in professional workplace with Mandarin speakers.
+

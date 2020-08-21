@@ -1,0 +1,52 @@
+NAME
+EMAIL
+
+Professional Profile
+
+Since I was a child I have been very passionate about this subject. I have done many
+internships in the field with both large and small businesses and would like to gain
+more paid work and full time experience. I am very good at problem solving and adapting
+to different styles of working and for this reason I think I would be a great asset to
+your team.
+
+Education
+Bachelor of Science in Neuroscience, Lancaster University
+
+Work Experience
+
+IBM, Javascript developer
+- Worked with Angular and React frameworks.
+- Programmed back-end with Node JS.
+- Continuous Integration (CI).
+
+
+IBM, Team Leader
+- Manage a development team.
+- Used the Agile management framework.
+- Acted as SCRUM Master.
+
+
+Samaritans, Volunteer
+- Listened to caller's problems.
+- Great patience was required.
+- Emotional strength.
+
+Skills
+
+Android
+- Fluent in Java and XML.
+- Published a game to the Google Play Store.
+- Worked with Bluetooth Low Energy.
+
+
+Mobile
+- Two years React Native experience.
+- Worked with Ionic and Angular.
+- Published cross-platform apps.
+
+
+Python
+- Developed back-end with Django and Flask.
+- Machine learning projects with Neural Networks.
+- Analytical projects.
+

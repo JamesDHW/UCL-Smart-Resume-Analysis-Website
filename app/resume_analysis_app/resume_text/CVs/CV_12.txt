@@ -1,0 +1,50 @@
+NAME
+EMAIL
+
+Professional Profile
+
+Hardworking, resourceful and reliable I think I would be a great fit for your company
+as I am passionate about the field and the work you do. I am a highly skilled individual
+and I think that I would bring a great deal to your company including motivation, teamwork
+and a positive attitude and outlook.
+
+Education
+Bachelor of Music, University of Bath
+
+Work Experience
+
+IBM, Javascript developer
+- Worked with Angular and React frameworks.
+- Programmed back-end with Node JS.
+- Continuous Integration (CI).
+
+
+IBM, Team Leader
+- Manage a development team.
+- Used the Agile management framework.
+- Acted as SCRUM Master.
+
+
+Local Cafe, Server
+- Hard worker.
+- Friendly service.
+- Managed shop when the owner was ill.
+
+Skills
+Java
+- Programmed in Java for three years'.
+- Taught Java to undergraduate students.
+- Implemented Android apps.
+
+
+Mobile
+- Two years React Native experience.
+- Worked with Ionic and Angular.
+- Published cross-platform apps.
+
+
+Team Leader
+- Worked to get the most out of team members.
+- Organisation and people skills.
+- Two years' experience.
+

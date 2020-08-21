@@ -1,0 +1,34 @@
+{% extends 'resume_analysis_app/_site_frame.html' %}
+{% block content %}
+
+    <div class="container box" style="padding: 2%">
+        <div class="row">
+            <div class="col"><h4>Positions Posted By Me</h4></div>
+            <div class="col-1" style="margin-right:10px">
+                <form method="get" action="{% url 'add_job' %}">
+                    <button type="submit">Add</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% for job in jobs %}
+        <div class="container box">
+            <div class="row">
+                <div class="col">
+                    <a href="{% url 'job_view' %}?id={{job.id}}"><h3>{{job.title}}</h3></a>
+                    <h5>£{{job.salary}} - {{job.location}}</h5>
+                </div>
+                {% if job.author == user %}
+                    <div class="col-4" style="text-align: right !important">
+                        <a href="{% url 'dash' %}?job_id={{job.id}}">See Applicants</a>
+                        <form method="post" action="{% url 'add_job' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="id" value="{{job.id}}">
+                            <a href="#" onclick="this.parentNode.submit();">Update Position</a>
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

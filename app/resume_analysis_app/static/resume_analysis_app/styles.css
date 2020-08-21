@@ -15,6 +15,9 @@ h1 {
 }
 
 .box {
+    outline-color: #555;
+    outline-style: solid;
+    outline-width: 1px;
     padding: 5%;
     margin: 5px;
     background-color: #fff;

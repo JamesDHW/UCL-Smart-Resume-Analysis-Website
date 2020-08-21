@@ -1,0 +1,51 @@
+NAME
+EMAIL
+
+Professional Profile
+
+I am a very organised and punctual worker. I always take time to ensure that my work
+is exemplary in every way; nothing less than perfection is good enough for the work
+that I produce. If I gain a position within this sector, I hope to add value by
+exploring all aspects of a situation.
+
+Education
+Bachelor of Science in Environmental Engineering, Durham University
+
+Work Experience
+
+Google, Inventor
+- Use Linux (UBUNTU).
+- Programmed and prototyped in Python.
+- Presented at client meetings.
+
+
+Samaritans, Volunteer
+- Listened to caller's problems.
+- Great patience was required.
+- Emotional strength.
+
+
+National Trust, Historical Interpreter
+- Friendly and approachable.
+- Knowledgeable and a fast learner.
+- Passionate about the subject matter.
+
+Skills
+
+Kotlin
+- Fluent in Kotlin with two years' experience.
+- Published five Kotlin apps to the play store.
+- Created cross platform apps for Android and iOS.
+
+
+Communication
+- Worked in multiple teams using Agile.
+- Adept in organisational software.
+- Was SCRUM Master in a number of groups.
+
+
+Team Leader
+- Worked to get the most out of team members.
+- Organisation and people skills.
+- Two years' experience.
+

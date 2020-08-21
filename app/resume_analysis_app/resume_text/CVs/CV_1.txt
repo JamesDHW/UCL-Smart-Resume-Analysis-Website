@@ -1,0 +1,49 @@
+NAME
+EMAIL
+
+Professional Profile
+
+I am an exceptionally hard worker with a passion for learning new skills within this
+industry. I particularly became interested in the sector when I was very young and dreamt
+that I could one day grow up and contribute towards this area.
+
+Education
+Bachelor of Science in Mathematics, University of Exeter
+
+Work Experience
+IBM, Programmer
+- Led a project with five team members.
+- Worked with Git and Github.
+- Containerized projects with Docker.
+
+
+Samaritans, Volunteer
+- Listened to caller's problems.
+- Great patience was required.
+- Emotional strength.
+
+
+Local Shop, Till Attendant
+- Took responsibility for accurate accounting.
+- Organised stock.
+- Punctual attendance.
+
+Skills
+
+Kotlin
+- Fluent in Kotlin with two years' experience.
+- Published five Kotlin apps to the play store.
+- Created cross platform apps for Android and iOS.
+
+
+Mobile
+- Two years React Native experience.
+- Worked with Ionic and Angular.
+- Published cross-platform apps.
+
+
+Communication
+- Worked in multiple teams using Agile.
+- Adept in organisational software.
+- Was SCRUM Master in a number of groups.
+

@@ -1,0 +1,50 @@
+NAME
+EMAIL
+
+Professional Profile
+
+I don't have as much work experience as I would like within this sector, however
+my education is excellent with a high degree from a good university. I am a keen
+worker who is always willing to learn new skills and work with new technologies.
+
+Education
+Bachelor of Science in Genetic Engineering and Biotechnology, University of Exeter
+
+Work Experience
+
+Local Shop, Till Attendant
+- Took responsibility for accurate accounting.
+- Organised stock.
+- Punctual attendance.
+
+
+Small Museum, Creative Director
+- Created unique learning experiences.
+- Organised a team of ten people.
+- Was organised and punctual.
+
+
+Small factory, Quality Controller
+- Managed the floor, leading ten people.
+- Punctual, attentive and observant.
+- High standard.
+
+Skills
+
+Kotlin
+- Fluent in Kotlin with two years' experience.
+- Published five Kotlin apps to the play store.
+- Created cross platform apps for Android and iOS.
+
+
+Android
+- Fluent in Java and XML.
+- Published a game to the Google Play Store.
+- Worked with Bluetooth Low Energy.
+
+
+Fluent in Mandarin
+- Learned Mandarin at A-level.
+- Worked in China for three years.
+- Worked in professional workplace with Mandarin speakers.
+

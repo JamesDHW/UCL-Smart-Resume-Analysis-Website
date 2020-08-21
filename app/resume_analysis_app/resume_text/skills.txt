@@ -1,0 +1,59 @@
+Java
+- Programmed in Java for three years'.
+- Taught Java to undergraduate students.
+- Implemented Android apps.
+#
+Kotlin
+- Fluent in Kotlin with two years' experience.
+- Published five Kotlin apps to the play store.
+- Created cross platform apps for Android and iOS.
+#
+iOS
+- Experience in Swift and Object Oriented C.
+- Published a game to the app store.
+- Worked in XCode.
+#
+Android
+- Fluent in Java and XML.
+- Published a game to the Google Play Store.
+- Worked with Bluetooth Low Energy.
+#
+Mobile
+- Two years React Native experience.
+- Worked with Ionic and Angular.
+- Published cross-platform apps.
+#
+JavaScript
+- Five years' experience.
+- Worked on cross-platform mobile applications.
+- Node JS development experience.
+#
+Python
+- Developed back-end with Django and Flask.
+- Machine learning projects with Neural Networks.
+- Analytical projects.
+#
+Management
+- Worked as the head of a team.
+- Been trained in team management using Agile.
+- Three years' experience.
+#
+Communication
+- Worked in multiple teams using Agile.
+- Adept in organisational software.
+- Was SCRUM Master in a number of groups.
+#
+Team Leader
+- Worked to get the most out of team members.
+- Organisation and people skills.
+- Two years' experience.
+#
+Fluent in Mandarin
+- Learned Mandarin at A-level.
+- Worked in China for three years.
+- Worked in professional workplace with Mandarin speakers.
+#
+Sign Language
+- Fluent in Sign Language.
+- Has worked with deaf people.
+- Also fluent in ASL.

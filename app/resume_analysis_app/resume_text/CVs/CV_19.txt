@@ -1,0 +1,51 @@
+NAME
+EMAIL
+
+Professional Profile
+
+I am a kind and empathetic person who would fit well in your team and company. I am also a
+great communicator and team-leader, I was a student ambassador at my university where I honed
+these skills and learned how to lead and organise people in an effective and streamlined
+way.
+
+Education
+Bachelor of Science in Nursing, London School of Economics
+
+Work Experience
+
+Google, Inventor
+- Use Linux (UBUNTU).
+- Programmed and prototyped in Python.
+- Presented at client meetings.
+
+
+Local Cafe, Server
+- Hard worker.
+- Friendly service.
+- Managed shop when the owner was ill.
+
+
+Small Museum, Creative Director
+- Created unique learning experiences.
+- Organised a team of ten people.
+- Was organised and punctual.
+
+Skills
+
+Python
+- Developed back-end with Django and Flask.
+- Machine learning projects with Neural Networks.
+- Analytical projects.
+
+
+Communication
+- Worked in multiple teams using Agile.
+- Adept in organisational software.
+- Was SCRUM Master in a number of groups.
+
+
+Team Leader
+- Worked to get the most out of team members.
+- Organisation and people skills.
+- Two years' experience.
+

@@ -1,0 +1,51 @@
+NAME
+EMAIL
+
+Professional Profile
+
+Hardworking, resourceful and reliable I think I would be a great fit for your company
+as I am passionate about the field and the work you do. I am a highly skilled individual
+and I think that I would bring a great deal to your company including motivation, teamwork
+and a positive attitude and outlook.
+
+Education
+Bachelor of Music in Performance, University of Oxford
+
+Work Experience
+
+Local Cafe, Server
+- Hard worker.
+- Friendly service.
+- Managed shop when the owner was ill.
+
+
+National Trust, Historical Interpreter
+- Friendly and approachable.
+- Knowledgeable and a fast learner.
+- Passionate about the subject matter.
+
+
+Small factory, Quality Controller
+- Managed the floor, leading ten people.
+- Punctual, attentive and observant.
+- High standard.
+
+Skills
+
+Android
+- Fluent in Java and XML.
+- Published a game to the Google Play Store.
+- Worked with Bluetooth Low Energy.
+
+
+JavaScript
+- Five years' experience.
+- Worked on cross-platform mobile applications.
+- Node JS development experience.
+
+
+Python
+- Developed back-end with Django and Flask.
+- Machine learning projects with Neural Networks.
+- Analytical projects.
+

@@ -1,0 +1,51 @@
+NAME
+EMAIL
+
+Professional Profile
+
+Since I was a child I have been very passionate about this subject. I have done many
+internships in the field with both large and small businesses and would like to gain
+more paid work and full time experience. I am very good at problem solving and adapting
+to different styles of working and for this reason I think I would be a great asset to
+your team.
+
+Education
+Bachelor of Science in Forestry, University of Exeter
+
+Work Experience
+IBM, Programmer
+- Led a project with five team members.
+- Worked with Git and Github.
+- Containerized projects with Docker.
+
+
+IBM, Team Leader
+- Manage a development team.
+- Used the Agile management framework.
+- Acted as SCRUM Master.
+
+
+Small factory, Quality Controller
+- Managed the floor, leading ten people.
+- Punctual, attentive and observant.
+- High standard.
+
+Skills
+
+JavaScript
+- Five years' experience.
+- Worked on cross-platform mobile applications.
+- Node JS development experience.
+
+
+Communication
+- Worked in multiple teams using Agile.
+- Adept in organisational software.
+- Was SCRUM Master in a number of groups.
+
+
+Team Leader
+- Worked to get the most out of team members.
+- Organisation and people skills.
+- Two years' experience.
+

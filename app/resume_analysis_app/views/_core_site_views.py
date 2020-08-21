@@ -15,14 +15,19 @@ def search_results(request):
     if (request.method == "GET") and (search := request.GET.get('search')):
         try:
             jobs = JobDescription.objects.filter(title__icontains=search)
+
             if len(search) > 4:
                 organisations = Organisation.objects.filter(name__icontains=search)
-            else:   # If small search query only look for exact matches for organisations
+            else:  # If small search query only look for exact matches for organisations
                 organisations = Organisation.objects.filter(name=search)
         except:
             messages.warning(request, 'Error')
             return redirect('home')
         else:
+            try:
+                organisation = Organisation.objects.get(name=search)
+                jobs = jobs | JobDescription.objects.filter(organisation=organisation).order_by('-id')
+            except: pass
             context = {'search': search, 'jobs': jobs, 'organisations': organisations}
             return render(request, 'resume_analysis_app/search_results.html', context)
 
@@ -40,8 +45,9 @@ def register(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             new_user = form.save()
-            if (e := request.POST.get('email')) and (org := Organisation.objects.get(email_extension=e.split('@')[-1])):
-                org.employees.add(new_user)  # Add to list of employees
+            if (e := request.POST.get('email')) and \
+                    (org := Organisation.objects.filter(email_extension=e.split('@')[-1])):
+                if len(org.all()) == 1: org.all()[0].employees.add(new_user)  # Add to list of employees
             messages.success(request, 'Your account has been created! You are now able to log in')
             return redirect('login')
     else:

@@ -1,6 +1,5 @@
 import json
 
-import requests
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
@@ -9,8 +8,9 @@ from pdfminer.layout import LAParams, LTTextBox, LTTextLine
 from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
 from pdfminer.pdfparser import PDFParser, PDFDocument
 
-from ..models import Account, JobDescription
-from ._my_functions import get_keywords
+from ..models import Account
+from .._app_functions import extract_insights
+
 
 @login_required
 def profile(request):
@@ -37,24 +37,23 @@ def profile(request):
         return extrctd_txt
 
     def upload_cv(CV):
-        applicant = Account.objects.get(user=request.user)
-        applicant.resume = CV
-        applicant.filename = CV.name
+        account = Account.objects.get(user=request.user)
+        account.resume = CV
+        account.filename = CV.name
 
         pdf_text = PDF_to_text(CV)  # Text extracted
-        applicant.resume_plain_text = pdf_text
+        account.resume_plain_text = pdf_text
 
-        # Call NodeRED to access Watson
-        url = 'https://resume-node-red.mybluemix.net/CV'
-        response = requests.post(url, data=pdf_text.encode('ascii', errors='ignore')).json()
+        extracted_kws, extracted_cats, extracted_concepts = extract_insights(pdf_text)
 
-        my_keywords = get_keywords(pdf_text)
+        account.keywords = json.dumps(extracted_kws)
+        account.concepts = json.dumps(extracted_concepts)
+        for i, cat in enumerate(extracted_cats):
+            if i == 0: account.category1 = cat
+            if i == 1: account.category2 = cat
+            if i == 2: account.category3 = cat
 
-        applicant.categories = json.dumps(response['categories'])
-        applicant.concepts = json.dumps(response['concepts'])
-        applicant.keywords = json.dumps(my_keywords)
-
-        applicant.save()
+        account.save()
 
     # If CV submitted to page
     if request.method == 'POST' and len(request.FILES) > 0:
@@ -67,6 +66,16 @@ def profile(request):
         else:
             messages.warning(request, 'Incorrect file type (must be .pdf).')
             return redirect('profile')
+    # To delete a qualification
+    elif request.method == 'POST' and (qual := request.POST.get('delete')):
+        account = Account.objects.get(user=request.user)
+        qual = json.loads(qual.replace("', '", '", "').replace("': '", '": "').replace("{'", '{"').replace("'}", '"}'))
+        account.education = json.loads(account.education)
+        account.education.remove(qual)
+        account.education = json.dumps(account.education)
+        account.save()
+        messages.success(request, 'Qualification removed.')
+        return redirect('profile')
     # No files sent to path
     elif request.method == 'POST':
         messages.warning(request, 'No resume selected.')
@@ -75,4 +84,6 @@ def profile(request):
     else:
         # jobs = JobDescription.objects.filter(author=request.user)
         # context = {'jobs': jobs}
-        return render(request, 'resume_analysis_app/profile.html')
+        account = Account.objects.get(user=request.user)
+        account.education = json.loads(account.education)
+        return render(request, 'resume_analysis_app/profile.html', {'account': account})

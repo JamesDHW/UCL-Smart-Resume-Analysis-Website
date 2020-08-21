@@ -1,0 +1,48 @@
+NAME
+EMAIL
+
+Professional Profile
+I have plenty of professional experience in the industry. My work in particular
+for my previous company highlights my understanding of the key aspects of my
+industry and the insights which I can provide to a company as an employee.
+
+Education
+Bachelor of Music in Theory, University of Exeter
+
+Work Experience
+IBM, Programmer
+- Led a project with five team members.
+- Worked with Git and Github.
+- Containerized projects with Docker.
+
+
+IBM, Team Leader
+- Manage a development team.
+- Used the Agile management framework.
+- Acted as SCRUM Master.
+
+
+Local Cafe, Server
+- Hard worker.
+- Friendly service.
+- Managed shop when the owner was ill.
+
+Skills
+
+Android
+- Fluent in Java and XML.
+- Published a game to the Google Play Store.
+- Worked with Bluetooth Low Energy.
+
+
+Python
+- Developed back-end with Django and Flask.
+- Machine learning projects with Neural Networks.
+- Analytical projects.
+
+
+Communication
+- Worked in multiple teams using Agile.
+- Adept in organisational software.
+- Was SCRUM Master in a number of groups.
+

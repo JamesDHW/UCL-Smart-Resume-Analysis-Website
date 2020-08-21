@@ -1,0 +1,51 @@
+NAME
+EMAIL
+
+Professional Profile
+
+I am an individual who is deeply compassionate for others, which is why I chose this
+industry to take up as a career. My motivations are to bring the most value to the
+greatest number of people which is why I will be a valuable asset to a company within
+this sector.
+
+Education
+Bachelor of Clinical Science, University College London
+
+Work Experience
+
+Google, Inventor
+- Use Linux (UBUNTU).
+- Programmed and prototyped in Python.
+- Presented at client meetings.
+
+
+Local Shop, Till Attendant
+- Took responsibility for accurate accounting.
+- Organised stock.
+- Punctual attendance.
+
+
+National Trust, Historical Interpreter
+- Friendly and approachable.
+- Knowledgeable and a fast learner.
+- Passionate about the subject matter.
+
+Skills
+
+Kotlin
+- Fluent in Kotlin with two years' experience.
+- Published five Kotlin apps to the play store.
+- Created cross platform apps for Android and iOS.
+
+
+iOS
+- Experience in Swift and Object Oriented C.
+- Published a game to the app store.
+- Worked in XCode.
+
+
+Python
+- Developed back-end with Django and Flask.
+- Machine learning projects with Neural Networks.
+- Analytical projects.
+

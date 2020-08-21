@@ -12,20 +12,19 @@
 
         <!-- My CSS -->
         <link rel="stylesheet" type="text/css" href="{% static 'resume_analysis_app/styles.css' %}">
-        {% if title%}
-            <title>{{title}}</title>
-        {% else %}
-            <title>Smart Recruitment</title>
-        {% endif %}
+
+        <title>Quandary PRO</title>
+        <link rel="shortcut icon" type="image/png" href="{% static 'resume_analysis_app/favicon.ico' %}"/>
+
     </head>
-    <body style="background-color: #f0f0f0;">
+    <body style="background-image: url({% static 'resume_analysis_app/background.png' %});">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top justify-content-center">
             <div class="row" style="width:100%;">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="col">
-                    <a class="navbar-brand mr-4 mt-2" href="{% url 'home' %}">Smart Recruitment</a>
+                    <a class="navbar-brand mr-4 mt-2" href="{% url 'home' %}">Quandary PRO</a>
                 </div>
                 <form method="get" action="{% url 'search' %}" style="min-width:50%;">
                     <div class="input-group mb-3 mt-3">
@@ -56,25 +55,31 @@
                 <!-- Sidebar to show Applicants on Applicant Dashboard-->
                 {% if request.path == "/dashboard/" %}
                     <div class="col-md-3" style="margin-top: 150px; padding: 3px;">
-                        <div class="content-section box">
+                        <div class="container box">
                             <h3 style="text-align:center">Applicants</h3>
                             <br>
-                            <ul class="list-group" style="width:100%">
+                            <ul class="list-group">
+                                <form method="get">
+                                    <input type="hidden" name="update" value="1" />
+                                    <input type="hidden" name="job_id" value="{{job.id}}" />
+                                    <button style="width:100%" onclick="this.parentNode.submit()"
+                                    >Search for Recommendations</button>
+                                </form>
+                                <br>
                                 {% for application in applicants %}
                                     {% if application.id == applicant.id %}
-                                        <form method="get" action="" style="width:100%">
-                                            <input type="hidden" name="job_id" value="{{job.id}}" />
-                                            <button style="background: #555; color: white; width:100%"
-                                                    onclick="this.parentNode.submit()"
-                                            >{{ application.username }} (X)</button>
+                                        <form method="get" style="outline-style: solid; outline-width: 1px;">
+                                            <input type="hidden" name="job_id" value="{{job.id}}"/>
+                                            <a href="#" style="padding:10px; background:#ddd; display:block"
+                                               onclick="this.parentNode.submit()"
+                                            >{{ application.username }} (X)</a>
                                         </form>
                                     {% else %}
-                                        <form method="get" action="" style="width:100%">
+                                        <form method="get" action="" style="padding:10px; display:block; outline-style: solid; outline-width: 1px;">
                                             <input type="hidden" name="job_id" value="{{job.id}}" />
                                             <input type="hidden" name="user" value="{{application.id}}" />
-                                            <button style="width:100%"
-                                                    onclick="this.parentNode.submit()"
-                                            >{{ application.username }}</button>
+                                            <a href="#" onclick="this.parentNode.submit()" style="display:block;"
+                                            >{{ application.username }}</a>
                                         </form>
                                     {% endif %}
                                 {% endfor %}
@@ -96,7 +101,7 @@
                 <!-- Sidebar to Show the Organisation Users Belong to-->
                 {% if request.path == "/profile/" and user.account.organisation %}
                     <div class="col-md-4" style="margin-top: 150px; padding: 3px;">
-                        <div class="content-section box">
+                        <div class="container box">
                             <h3 style="text-align: center">Current Position</h3>
                             <br>
                             {% if user.account.job %}
@@ -107,16 +112,40 @@
                             {% else %}
                                 <p>No Position Found</p>
                             {% endif %}
-                            <br><br>
+                            <br>
                             <a href="{% url 'organisation_view' %}?id={{user.account.organisation.id}}">
                                 <h3 style="text-align: center">{{user.account.organisation}}</h3>
                             </a>
                             <br>
                             <p style="text-align:justify">{{user.account.organisation.company_description}}</p>
                         </div>
+                        <div class="container box">
+                            <a href="{% url 'posted_positions' %}">
+                                <h3 style="text-align: center">Posted Positions</h3>
+                            </a>
+                        </div>
                     </div>
                 {% endif %}
             </div>
+            {% if is_paginated %}
+                {% if page_obj.has_previous %}
+                    <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+                    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                        <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+                    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+                {% endif %}
+            {% endif %}
         <br>
         <br>
         <br>

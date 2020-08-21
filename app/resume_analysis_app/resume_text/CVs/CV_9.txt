@@ -1,0 +1,49 @@
+NAME
+EMAIL
+
+Professional Profile
+
+I am an exceptionally hard worker with a passion for learning new skills within this
+industry. I particularly became interested in the sector when I was very young and dreamt
+that I could one day grow up and contribute towards this area.
+
+Education
+Bachelor of Science in Mathematics, University of Cambridge
+
+Work Experience
+IBM, Programmer
+- Led a project with five team members.
+- Worked with Git and Github.
+- Containerized projects with Docker.
+
+
+Small Museum, Creative Director
+- Created unique learning experiences.
+- Organised a team of ten people.
+- Was organised and punctual.
+
+
+Restaurant, Server
+- Polite and well presented.
+- Good at communication.
+- Fast and hardworking.
+
+Skills
+
+JavaScript
+- Five years' experience.
+- Worked on cross-platform mobile applications.
+- Node JS development experience.
+
+
+Communication
+- Worked in multiple teams using Agile.
+- Adept in organisational software.
+- Was SCRUM Master in a number of groups.
+
+
+Team Leader
+- Worked to get the most out of team members.
+- Organisation and people skills.
+- Two years' experience.
+

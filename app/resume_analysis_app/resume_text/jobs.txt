@@ -1,0 +1,59 @@
+IBM, Programmer
+- Led a project with five team members.
+- Worked with Git and Github.
+- Containerized projects with Docker.
+#
+IBM, Javascript developer
+- Worked with Angular and React frameworks.
+- Programmed back-end with Node JS.
+- Continuous Integration (CI).
+#
+IBM, Team Leader
+- Manage a development team.
+- Used the Agile management framework.
+- Acted as SCRUM Master.
+#
+Google, Inventor
+- Use Linux (UBUNTU).
+- Programmed and prototyped in Python.
+- Presented at client meetings.
+#
+Samaritans, Volunteer
+- Listened to caller's problems.
+- Great patience was required.
+- Emotional strength.
+#
+Local Shop, Till Attendant
+- Took responsibility for accurate accounting.
+- Organised stock.
+- Punctual attendance.
+#
+Local Cafe, Server
+- Hard worker.
+- Friendly service.
+- Managed shop when the owner was ill.
+#
+Small Museum, Creative Director
+- Created unique learning experiences.
+- Organised a team of ten people.
+- Was organised and punctual.
+#
+National Trust, Historical Interpreter
+- Friendly and approachable.
+- Knowledgeable and a fast learner.
+- Passionate about the subject matter.
+#
+Small factory, Quality Controller
+- Managed the floor, leading ten people.
+- Punctual, attentive and observant.
+- High standard.
+#
+Restaurant, Server
+- Polite and well presented.
+- Good at communication.
+- Fast and hardworking.
+#
+Local School, Classroom Assisstant
+- Fluent in sign language.
+- Empathetic and patient
+- Took class for small activities.

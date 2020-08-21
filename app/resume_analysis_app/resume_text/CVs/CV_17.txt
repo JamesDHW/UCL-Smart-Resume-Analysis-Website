@@ -1,0 +1,50 @@
+NAME
+EMAIL
+
+Professional Profile
+
+I am an exceptionally hard worker with a passion for learning new skills within this
+industry. I particularly became interested in the sector when I was very young and dreamt
+that I could one day grow up and contribute towards this area.
+
+Education
+Bachelor of Science in Business and Technology, University College London
+
+Work Experience
+
+IBM, Javascript developer
+- Worked with Angular and React frameworks.
+- Programmed back-end with Node JS.
+- Continuous Integration (CI).
+
+
+Samaritans, Volunteer
+- Listened to caller's problems.
+- Great patience was required.
+- Emotional strength.
+
+
+Small Museum, Creative Director
+- Created unique learning experiences.
+- Organised a team of ten people.
+- Was organised and punctual.
+
+Skills
+
+Python
+- Developed back-end with Django and Flask.
+- Machine learning projects with Neural Networks.
+- Analytical projects.
+
+
+Communication
+- Worked in multiple teams using Agile.
+- Adept in organisational software.
+- Was SCRUM Master in a number of groups.
+
+
+Fluent in Mandarin
+- Learned Mandarin at A-level.
+- Worked in China for three years.
+- Worked in professional workplace with Mandarin speakers.
+

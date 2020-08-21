@@ -1,0 +1,48 @@
+NAME
+EMAIL
+
+Professional Profile
+I have plenty of professional experience in the industry. My work in particular
+for my previous company highlights my understanding of the key aspects of my
+industry and the insights which I can provide to a company as an employee.
+
+Education
+Bachelor of Science in Criminal Justice, University of St Andrews
+
+Work Experience
+IBM, Programmer
+- Led a project with five team members.
+- Worked with Git and Github.
+- Containerized projects with Docker.
+
+
+Small factory, Quality Controller
+- Managed the floor, leading ten people.
+- Punctual, attentive and observant.
+- High standard.
+
+
+Restaurant, Server
+- Polite and well presented.
+- Good at communication.
+- Fast and hardworking.
+
+Skills
+
+iOS
+- Experience in Swift and Object Oriented C.
+- Published a game to the app store.
+- Worked in XCode.
+
+
+JavaScript
+- Five years' experience.
+- Worked on cross-platform mobile applications.
+- Node JS development experience.
+
+
+Communication
+- Worked in multiple teams using Agile.
+- Adept in organisational software.
+- Was SCRUM Master in a number of groups.
+

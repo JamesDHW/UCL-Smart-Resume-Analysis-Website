@@ -1,0 +1,49 @@
+NAME
+EMAIL
+
+Professional Profile
+
+I am an individual who is deeply compassionate for others, which is why I chose this
+industry to take up as a career. My motivations are to bring the most value to the
+greatest number of people which is why I will be a valuable asset to a company within
+this sector.
+
+Education
+Bachelor of Science in Business Administration, Lancaster University
+
+Work Experience
+IBM, Programmer
+- Led a project with five team members.
+- Worked with Git and Github.
+- Containerized projects with Docker.
+
+
+Samaritans, Volunteer
+- Listened to caller's problems.
+- Great patience was required.
+- Emotional strength.
+
+
+Local Shop, Till Attendant
+- Took responsibility for accurate accounting.
+- Organised stock.
+- Punctual attendance.
+
+Skills
+Java
+- Programmed in Java for three years'.
+- Taught Java to undergraduate students.
+- Implemented Android apps.
+
+
+Mobile
+- Two years React Native experience.
+- Worked with Ionic and Angular.
+- Published cross-platform apps.
+
+
+JavaScript
+- Five years' experience.
+- Worked on cross-platform mobile applications.
+- Node JS development experience.
+
