@@ -183,8 +183,6 @@ def update_applicants(job):
             continue
         # If not enough keywords, eliminate from recommendations
         if len([kw for kw in json.loads(cat_matches[i].keywords).keys() if kw.lower() in job_kws]) < kw_rec_boundary:
-            print('del', len([kw for kw in json.loads(cat_matches[i].keywords).keys() if kw.lower() in job_kws]))
-            print('del', kw_rec_boundary)
             del cat_matches[i]
         else:
             i += 1
