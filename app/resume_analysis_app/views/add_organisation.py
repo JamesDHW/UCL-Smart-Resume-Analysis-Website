@@ -46,10 +46,12 @@ def add_organisation(request):
         return redirect('profile')
     # Just get the page with the form on
     else:
+        context = {}
         if org_id := request.GET.get('id'):
             try:
                 org = Organisation.objects.get(id=org_id)
-                context = {'organisation': org}
+                if org.owner == request.user:
+                    context = {'organisation': org}
             except:
-                context = {}
+                pass
         return render(request, 'resume_analysis_app/add_organisation.html', context)

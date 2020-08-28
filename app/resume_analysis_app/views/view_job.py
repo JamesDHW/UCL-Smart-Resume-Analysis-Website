@@ -1,3 +1,4 @@
+import datetime
 from django.contrib import messages
 from django.shortcuts import render, redirect
 
@@ -18,8 +19,9 @@ def job_view(request):
             job.applicants.add(request.user)
             messages.success(request, 'Applied for position.')
         # Identified this job as user's current position
-        if request.GET.get('position'):
+        if request.GET.get('position') and (since := request.GET.get('select_year')):
             account = Account.objects.get(user=request.user)
+            account.job_start = since
             account.job = job
             account.save()
             update_aggregate_personality(job)
@@ -29,4 +31,5 @@ def job_view(request):
         messages.warning(request, 'Error finding job details.')
         return redirect('home')
 
-    return render(request, 'resume_analysis_app/view_job.html', {'job': job})
+    context = {'job': job, 'years': [datetime.datetime.now().year-x for x in range(15)]}
+    return render(request, 'resume_analysis_app/view_job.html', context)

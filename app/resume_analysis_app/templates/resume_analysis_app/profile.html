@@ -3,20 +3,30 @@
 
     <div class="container box">
         <div class="row">
-            <h1>{{ user.username }}</h1>
+            <h1>{{ user.first_name }}</h1>
         </div>
         <div class="row">
             <h5>{{ user.email }}</h5>
         </div>
     </div>
     <br>
-    <div class="container box" style="padding: 2%">
-        <h4>Essential Information</h4>
-    </div>
+    {% if user.account.pers_big5 == "{}" or user.account.filename == "my_resume.pdf" %}
+        <div class="container box warning" style="padding: 2%">
+            <h4>Complete Your Profile</h4>
+        </div>
+    {% else %}
+       <div class="container box" style="padding: 2%">
+            <h4>Profile Complete</h4>
+       </div>
+    {% endif %}
 
-    <div class="container">
+    <div class="container" style="margin:5px">
         <div class="row">
-            <div class="col box" style="display:block">
+            {% if user.account.filename == "my_resume.pdf" %}
+            <div class="col box warning">
+            {% else %}
+            <div class="col box success">
+            {% endif %}
                 <h6 style="text-align:center">Upload My Resume</h6>
                 <p>(Current File: {{ account.filename }})</p>
                 <form method="post" enctype="multipart/form-data">
@@ -32,10 +42,14 @@
                     </div>
                 </form>
             </div>
-            <div class="col box" style="display:block">
+            {% if user.account.pers_big5 == "{}" %}
+            <div class="col box warning">
+            {% else %}
+            <div class="col box success">
+            {% endif %}
                 <h6 style="text-align:center">Let Us Get To Know More About You...</h6>
                 <br><br>
-                <form method="get" action="{% url 'interview' %}" style="width: 100%;">
+                <form method="get" action="{% url 'interview' %}">
                     <button class="btn btn-outline-secondary" type="submit" style="width: 100%;">Complete Questions</button>
                 </form>
             </div>

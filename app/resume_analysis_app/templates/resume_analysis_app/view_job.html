@@ -42,16 +42,9 @@
 
     {% if user.is_authenticated %}
         <div class="container box">
-            {% if user.account.organisation == job.organisation %}
-                <form method="get" action="">
-                    <input type="hidden" name="id" value="{{job.id}}" />
-                    <button type="submit" name="position" value="1" style="width:100%;">This is my position at {{job.organisation}}</button>
-                </form>
-                <br>
-            {% endif %}
             <form method="get" action="">
                 <input type="hidden" name="id" value="{{job.id}}" />
-                <button type="submit" name="apply" value="1" style="width:100%;">One Click Application</button>
+                <button class="btn btn-outline-secondary" type="submit" name="apply" value="1" style="width:100%;">One Click Application</button>
             </form>
         </div>
     {% endif %}

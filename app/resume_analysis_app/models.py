@@ -54,6 +54,7 @@ class Account(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     organisation = models.ForeignKey(Organisation, on_delete=models.CASCADE, blank=True, null=True, related_name='account_org')
     job = models.ForeignKey(JobDescription, on_delete=models.CASCADE, blank=True, null=True, related_name='job')
+    job_start = models.IntegerField(default=0)
     education = models.TextField(default='[]')
 
     resume = models.FileField(default='resumes/_.pdf', upload_to='resumes')

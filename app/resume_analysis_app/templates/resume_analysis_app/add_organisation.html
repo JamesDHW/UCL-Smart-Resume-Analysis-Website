@@ -20,10 +20,10 @@
                 <label for="name">Organisation Name:</label><br>
                 <input type="text" id="name" name="name" value="{{organisation.name}}" style="width: 100%" required><br>
 
-                <label for="email">Corporate Email Extension</label><br>
+                <label for="email">Corporate Email Extension:</label><br>
                 <input type="text" id="email" name="email" value="{{organisation.email_extension}}" style="width: 100%" required><br>
 
-                <label for="description">Company Description (i.e. specific skills):</label><br>
+                <label for="description">Company Description:</label><br>
                 <textarea id="description" rows="6" form="new_organisation" name="description" style="width: 100%" required>{{organisation.company_description}}</textarea>
                 <br>
 
@@ -32,7 +32,7 @@
                     <input type="hidden" name="id" value="{{organisation.id}}">
                 {% endif %}
 
-                <input type="submit" style="width: 100%; margin-top: 5%;">
+                <input class="btn btn-outline-secondary" type="submit" style="width: 100%; margin-top: 5%;">
             </fieldset>
         </form>
         {% if job %}

@@ -23,6 +23,14 @@ h1 {
     background-color: #fff;
 }
 
+.warning{
+    background-color: #fff2e6;
+}
+
+.success{
+    background-color: #e6ffe6;
+}
+
 button {
     width:100%
     transition-duration: 0.4s;

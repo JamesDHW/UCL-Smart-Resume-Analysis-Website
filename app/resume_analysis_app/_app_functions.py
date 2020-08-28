@@ -2,6 +2,8 @@ import requests
 import json
 from random import randint
 from statistics import mean
+from datetime import datetime
+
 
 # Option to discount insights below a certain relevance
 keyword_relevance_boundary = 0
@@ -119,37 +121,34 @@ def extract_insights(text):
 
 def update_applicants(job):
     print('\nUPDATING APPLICANTS')
-    cat1_matches = []
-    cat2_matches = []
-    cat3_matches = []
-    # Get all accounts which match the top 3 categories of the job
-    # Creates lists of lists (2-dimensional)
-    for kw in job.category1[1:].split('/'): # Always starts with '/' so remove first one
-        print('cat1:', kw)
-        cat1_matches.append(Account.objects.filter(
-            category1__icontains=kw, job__isnull=True) | Account.objects.filter(
-            category2__icontains=kw, job__isnull=True) | Account.objects.filter(
-            category3__icontains=kw, job__isnull=True))
+    # For each category search for 1 category above most specific category
+    cat1 = job.category1.split('/')
+    if len(cat1)>3: cat1 = "/".join(cat1[:-1])
+    else: cat1 = "/".join(cat1)
 
-    for kw in job.category2[1:].split('/'):
-        print('cat2:', kw)
-        cat2_matches.append(Account.objects.filter(
-            category1__icontains=kw, job__isnull=True) | Account.objects.filter(
-            category2__icontains=kw, job__isnull=True) | Account.objects.filter(
-            category3__icontains=kw, job__isnull=True))
+    cat2 = job.category2.split('/')
+    if len(cat2)>3: cat2 = "/".join(cat2[:-1])
+    else: cat2 = "/".join(cat2)
 
-    for kw in job.category3[1:].split('/'):
-        print('cat3:', kw)
-        cat3_matches.append(Account.objects.filter(
-            category1__icontains=kw, job__isnull=True) | Account.objects.filter(
-            category2__icontains=kw, job__isnull=True) | Account.objects.filter(
-            category3__icontains=kw, job__isnull=True))
+    cat3 = job.category3.split('/')
+    if len(cat3)>3: cat3 = "/".join(cat3[:-1])
+    else: cat3 = "/".join(cat3)
 
-    # Make lists 1 dimensional
-    cat1_matches = [val for lst in cat1_matches for val in lst if val]
-    cat2_matches = [val for lst in cat2_matches for val in lst if val]
-    cat3_matches = [val for lst in cat3_matches for val in lst if val]
-    # print(cat1_matches, cat2_matches, cat3_matches)
+    # Exclude with jobs already
+    cat1_matches = Account.objects.filter(
+        category1__contains=cat1).exclude(job__isnull=False) | Account.objects.filter(
+        category2__contains=cat1).exclude(job__isnull=False) | Account.objects.filter(
+        category3__contains=cat1).exclude(job__isnull=False)
+
+    cat2_matches = Account.objects.filter(
+        category1__contains=cat2).exclude(job__isnull=False) | Account.objects.filter(
+        category2__contains=cat2).exclude(job__isnull=False) | Account.objects.filter(
+        category3__contains=cat2).exclude(job__isnull=False)
+
+    cat3_matches = Account.objects.filter(
+        category1__contains=cat3).exclude(job__isnull=False) | Account.objects.filter(
+        category2__contains=cat3).exclude(job__isnull=False) | Account.objects.filter(
+        category3__contains=cat3).exclude(job__isnull=False)
 
     # Give each use points for how many times they appear in the lists
     # More points for getting a more relevant category
@@ -208,6 +207,7 @@ def update_aggregate_personality(job):
     aggr_needs = {k: [] for k, v in json.loads(emps[0].needs).items()}
     aggr_values = {k: [] for k, v in json.loads(emps[0].values).items()}
 
+    cur_year = datetime.now().year
     # For each employee, append the value to the list
     for emp in emps:
         pers_big5 = json.loads(emp.pers_big5)
@@ -219,14 +219,18 @@ def update_aggregate_personality(job):
         pers_needs = json.loads(emp.needs)
         pers_values = json.loads(emp.values)
 
-        aggr_big5 = {k: v+[pers_big5[k]] for k, v in aggr_big5.items()}
-        aggr_openness = {k: v+[pers_openness[k]] for k, v in aggr_openness.items()}
-        aggr_conscien = {k: v+[pers_conscien[k]] for k, v in aggr_conscien.items()}
-        aggr_agreeabl = {k: v+[pers_agreeabl[k]] for k, v in aggr_agreeabl.items()}
-        aggr_extraver = {k: v+[pers_extraver[k]] for k, v in aggr_extraver.items()}
-        aggr_em_range = {k: v+[pers_em_range[k]] for k, v in aggr_em_range.items()}
-        aggr_needs = {k: v+[pers_needs[k]] for k, v in aggr_needs.items()}
-        aggr_values = {k: v+[pers_values[k]] for k, v in aggr_values.items()}
+        # For n years they have been at the position
+        # count their personality n^2 times (higher weighting
+        # to those who stay longer predicts retention)
+        for _ in range(1+(cur_year-emp.job_start)**2):
+            aggr_big5 = {k: v+[pers_big5[k]] for k, v in aggr_big5.items()}
+            aggr_openness = {k: v+[pers_openness[k]] for k, v in aggr_openness.items()}
+            aggr_conscien = {k: v+[pers_conscien[k]] for k, v in aggr_conscien.items()}
+            aggr_agreeabl = {k: v+[pers_agreeabl[k]] for k, v in aggr_agreeabl.items()}
+            aggr_extraver = {k: v+[pers_extraver[k]] for k, v in aggr_extraver.items()}
+            aggr_em_range = {k: v+[pers_em_range[k]] for k, v in aggr_em_range.items()}
+            aggr_needs = {k: v+[pers_needs[k]] for k, v in aggr_needs.items()}
+            aggr_values = {k: v+[pers_values[k]] for k, v in aggr_values.items()}
 
     # Replace the lists of values with the mean of the list
     job.aggr_big5 = json.dumps({k: mean(v) for k, v in aggr_big5.items()})

@@ -5,7 +5,7 @@
     {% if applicant %}
         <div class="container box">
             <div class="row">
-                <h1>Applicant Dashboard</h1>
+                <h1>Candidate Dashboard</h1>
             </div>
         </div>
         <div class="container box">
@@ -50,6 +50,18 @@
             <div class="row">
                 <h3>Resume Analysis</h3>
             </div>
+            <div class="row" style="display:block"><h5>Candidate Categories:</h5></div>
+            <div class="row ml-2">
+                <p style="text-align: left; width:100%">{{applicant.account.category1}}</p>
+            </div>
+
+            <div class="row ml-2">
+                <p style="text-align: left; width:100%">{{applicant.account.category2}}</p>
+            </div>
+
+            <div class="row ml-2">
+                <p style="text-align: left; width:100%">{{applicant.account.category3}}</p>
+            </div>
             <div class="row" style="display:block"><h5>Matching keywords:</h5></div>
             <div class="col" style="display:block">
                 {% for kw in matches %}
@@ -75,12 +87,16 @@
             <div class="row">
                 <h3>Personality Analysis</h3>
             </div>
-            {% if fig %}
-                {% autoescape off %}
-                {{ fig }}
-                {% endautoescape %}
+            {% if applicant.account.pers_big5 != '{}' %}
+                {% if fig %}
+                    {% autoescape off %}
+                    {{ fig }}
+                    {% endautoescape %}
+                {% else %}
+                    Applicant hasn't yet responded to interview questions.
+                {% endif %}
             {% else %}
-                Applicant hasn't yet responded to interview questions.
+                <p style="text-align:center">No Personality Breakdown Available</p>
             {% endif %}
         </div> <br>
         {% if questions %}
@@ -122,7 +138,7 @@
     {% else %}
         <div class="container box">
             <div class="row">
-                <h1>Applicant Dashboard</h1>
+                <h1>Candidate Dashboard</h1>
             </div>
         </div>
         <div class="container box">
@@ -159,6 +175,22 @@
                 <h3>Position Analysis</h3>
             </div>
             <br>
+            <div class="row" style="display:block">
+                <div class="col">
+                    <h5>Position Categories:</h5>
+                </div>
+            </div>
+            <div class="row ml-2">
+                <p style="text-align: left; width:100%">{{job.category1}}</p>
+            </div>
+
+            <div class="row ml-2">
+                <p style="text-align: left; width:100%">{{job.category2}}</p>
+            </div>
+
+            <div class="row ml-2">
+                <p style="text-align: left; width:100%">{{job.category3}}</p>
+            </div>
             <div class="row" style="display:block">
                 <div class="col">
                     <h5>Position Concepts:</h5>
