@@ -54,39 +54,7 @@
             <div class="row" style="flex-wrap: wrap;">
                 <!-- Sidebar to show Applicants on Applicant Dashboard-->
                 {% if request.path == "/dashboard/" %}
-                    <div class="col-md-3" style="margin-top: 150px; padding: 3px;">
-                        <div class="container box">
-                            <h3 style="text-align:center">Applicants</h3>
-                            <br>
-                            <ul class="list-group">
-                                <form method="get">
-                                    <input type="hidden" name="update" value="1" />
-                                    <input type="hidden" name="job_id" value="{{job.id}}" />
-                                    <button class="btn btn-outline-secondary"
-                                            style="width:100%" onclick="this.parentNode.submit()"
-                                    >Search for Recommendations</button>
-                                </form>
-                                <br>
-                                {% for application in applicants %}
-                                    {% if application.id == applicant.id %}
-                                        <form method="get" style="outline-style: solid; outline-width: 1px;">
-                                            <input type="hidden" name="job_id" value="{{job.id}}"/>
-                                            <a href="#" style="padding:10px; background:#ddd; display:block"
-                                               onclick="this.parentNode.submit()"
-                                            >{{ application.username }} (X)</a>
-                                        </form>
-                                    {% else %}
-                                        <form method="get" action="" style="padding:10px; display:block; outline-style: solid; outline-width: 1px;">
-                                            <input type="hidden" name="job_id" value="{{job.id}}" />
-                                            <input type="hidden" name="user" value="{{application.id}}" />
-                                            <a href="#" onclick="this.parentNode.submit()" style="display:block;"
-                                            >{{ application.username }}</a>
-                                        </form>
-                                    {% endif %}
-                                {% endfor %}
-                              </ul>
-                        </div>
-                    </div>
+                    {% include 'resume_analysis_app/sidebar_app.html' %}
                 {% endif %}
                 <!-- Main Content -->
                 <div class="col-md-8" style="margin-top: 150px;">
@@ -97,66 +65,18 @@
                             </div>
                         {% endfor %}
                     {% endif %}
-                    {% block content %}{% endblock %}
+                    {% block content %}{% endblock content %}
                 </div>
                 <!-- Sidebar to Show the Organisation Users Belong to-->
                 {% if request.path == "/profile/" and user.account.organisation %}
-                    <div class="col-md-4" style="margin-top: 150px; padding: 3px;">
-                        <div class="container box">
-                            <h3 style="text-align: center">Current Position</h3>
-                            <br>
-                            {% if user.account.job %}
-                                <div class="col">
-                                    <a href="{% url 'job_view' %}?id={{user.account.job.id}}"><h5>{{user.account.job.title}}</h5></a>
-                                    <h6 style="margin:0px">£{{user.account.job.salary}} - {{user.account.job.location}}</h6>
-                                    <p>Since {{user.account.job_start}}</p>
-                                </div>
-                            {% else %}
-                                <p>No Position Found</p>
-                            {% endif %}
-                            <a href="{% url 'organisation_view' %}?id={{user.account.organisation.id}}">
-                                <h3 style="text-align: center">{{user.account.organisation}}</h3>
-                            </a>
-                            <br>
-                            <p style="text-align:justify">{{user.account.organisation.company_description}}</p>
-                        </div>
-                        <div class="container box">
-                            <a href="{% url 'posted_positions' %}">
-                                <h3 style="text-align: center">Posted Positions</h3>
-                            </a>
-                        </div>
-                    </div>
+                    {% include 'resume_analysis_app/sidebar_profile.html' %}
                 {% endif %}
+                <!-- Sidebar to on Job View Page-->
                 {% if request.path == "/job/" and user.account.organisation == job.organisation %}
-                        <div class="col-md-4" style="margin-top: 150px; padding: 3px;">
-                            <div class="container box">
-                                {% if user.account.job == job %}
-                                    <h3 style="text-align: center; padding: 5%">This Is Your Position at {{job.organisation}}</h3>
-                                {% else %}
-                                    <h3 style="text-align: center; padding: 5%">Is This Your Position at {{job.organisation}}?</h3>
-                                    <form method="get" action="">
-                                        <input type="hidden" name="id" value="{{job.id}}" />
-                                        <div class="row" style="margin:5%">
-                                            <div class="col-5">
-                                                <h6 style="text-align: center">I started in:</h6>
-                                            </div>
-                                            <div class="col">
-                                                <select name="select_year" style="display: block; width:100%; margin: auto">
-                                                    {% for year in years %}
-                                                        <option>{{year}}</option>
-                                                    {% endfor %}
-                                                    <option value="{{years|last}}">Earlier than {{years|last}}</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <button class="btn btn-outline-secondary" type="submit" name="position" value="1" style="width:100%;">Update My Position</button>
-                                    </form>
-                                    <br>
-                                {% endif %}
-                            </div>
-                        </div>
+                    {% include 'resume_analysis_app/sidebar_job.html' %}
                 {% endif %}
             </div>
+            <!-- Preparation for Pagination-->
             {% if is_paginated %}
                 {% if page_obj.has_previous %}
                     <a class="btn btn-outline-info mb-4" href="?page=1">First</a>

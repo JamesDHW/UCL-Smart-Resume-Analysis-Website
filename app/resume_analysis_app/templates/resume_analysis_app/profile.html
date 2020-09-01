@@ -25,7 +25,7 @@
             {% if user.account.filename == "my_resume.pdf" %}
             <div class="col box warning">
             {% else %}
-            <div class="col box success">
+            <div class="col box">
             {% endif %}
                 <h6 style="text-align:center">Upload My Resume</h6>
                 <p>(Current File: {{ account.filename }})</p>
@@ -45,7 +45,7 @@
             {% if user.account.pers_big5 == "{}" %}
             <div class="col box warning">
             {% else %}
-            <div class="col box success">
+            <div class="col box">
             {% endif %}
                 <h6 style="text-align:center">Let Us Get To Know More About You...</h6>
                 <br><br>
@@ -83,4 +83,4 @@
             </div>
         {% endfor %}
     {% endif %}
-{% endblock %}
+{% endblock content %}

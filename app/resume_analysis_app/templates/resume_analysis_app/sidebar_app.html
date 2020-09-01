@@ -1,0 +1,33 @@
+<div class="col-md-3" style="margin-top: 150px; padding: 3px;">
+    <div class="container box">
+        <h3 style="text-align:center">Applicants</h3>
+        <br>
+        <ul class="list-group">
+            <form method="get">
+                <input type="hidden" name="update" value="1" />
+                <input type="hidden" name="job_id" value="{{job.id}}" />
+                <button class="btn btn-outline-secondary"
+                        style="width:100%" onclick="this.parentNode.submit()"
+                >Search for Recommendations</button>
+            </form>
+            <br>
+            {% for application in applicants %}
+                {% if application.id == applicant.id %}
+                    <form method="get" style="outline-style: solid; outline-width: 1px;">
+                        <input type="hidden" name="job_id" value="{{job.id}}"/>
+                        <a href="#" style="padding:10px; background:#ddd; display:block"
+                           onclick="this.parentNode.submit()"
+                        >{{ application.username }} (X)</a>
+                    </form>
+                {% else %}
+                    <form method="get" action="" style="padding:10px; display:block; outline-style: solid; outline-width: 1px;">
+                        <input type="hidden" name="job_id" value="{{job.id}}" />
+                        <input type="hidden" name="user" value="{{application.id}}" />
+                        <a href="#" onclick="this.parentNode.submit()" style="display:block;"
+                        >{{ application.username }}</a>
+                    </form>
+                {% endif %}
+            {% endfor %}
+          </ul>
+    </div>
+</div>

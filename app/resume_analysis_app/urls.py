@@ -8,6 +8,7 @@ from .views.applicant_dash import applicant_dash
 from .views.profile import profile
 from .views.view_job import job_view
 from .views.view_organisation import organisation_view
+from .views.view_owned_organisations import owned_oragnisations
 from .views.view_posted_positions import posted_positions
 from .views.view_question import question_view
 
@@ -21,6 +22,7 @@ urlpatterns = [
     path('interview/', question_view, name='interview'),
     path('job/', job_view, name='job_view'),
     path('organisation/', organisation_view, name='organisation_view'),
+    path('my_organisations/', owned_oragnisations, name='owned_organisations'),
     path('positions/', posted_positions, name='posted_positions'),
     path('profile/', profile, name='profile'),
     path('register/', register, name="register"),

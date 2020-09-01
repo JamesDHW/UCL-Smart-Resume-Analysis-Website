@@ -1,30 +1,27 @@
 {% extends 'resume_analysis_app/_site_frame.html' %}
 {% block content %}
-
     <div class="container box" style="padding: 2%">
         <div class="row">
-            <div class="col"><h4>Positions Posted By Me</h4></div>
+            <div class="col"><h4>Organisations Owned By Me</h4></div>
             <div class="col-1" style="margin-right:20px">
-                <form method="get" action="{% url 'add_job' %}">
+                <form method="get" action="{% url 'add_organisation' %}">
                     <button class="btn btn-outline-secondary" type="submit">Add</button>
                 </form>
             </div>
         </div>
     </div>
-    {% for job in jobs %}
+    {% for org in orgs %}
         <div class="container box">
             <div class="row">
                 <div class="col">
-                    <a href="{% url 'job_view' %}?id={{job.id}}"><h3>{{job.title}}</h3></a>
-                    <h5>£{{job.salary}} - {{job.location}}</h5>
+                    <a href="{% url 'organisation_view' %}?id={{org.id}}"><h3>{{org.name}}</h3></a>
                 </div>
-                {% if job.author == user %}
+                {% if org.owner == user %}
                     <div class="col-4" style="text-align: right !important">
-                        <a href="{% url 'dash' %}?job_id={{job.id}}">See Applicants</a>
-                        <form method="post" action="{% url 'add_job' %}">
+                        <form method="get" action="{% url 'add_organisation' %}">
                             {% csrf_token %}
-                            <input type="hidden" name="id" value="{{job.id}}">
-                            <a href="#" onclick="this.parentNode.submit();">Update Position</a>
+                            <input type="hidden" name="id" value="{{org.id}}">
+                            <a href="#" onclick="this.parentNode.submit();">Update Organisation</a>
                         </form>
                     </div>
                 {% endif %}

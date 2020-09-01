@@ -1,0 +1,34 @@
+<div class="col-md-4" style="margin-top: 150px; padding: 3px;">
+    <div class="container box">
+        {% if user.account.job == job %}
+            <h3 style="text-align: center; padding: 5%">This Is Your Position at {{job.organisation}}</h3>
+            <form method="get">
+                <input type="hidden" name="id" value="{{job.id}}"/>
+                <input type="hidden" name="remove" value="1"/>
+                <a href="#" style="display:block; text-align: center;"
+                   onclick="this.parentNode.submit()"
+                >Not Your Position?</a>
+            </form>
+        {% else %}
+            <h3 style="text-align: center; padding: 5%">Is This Your Position at {{job.organisation}}?</h3>
+            <form method="get" action="">
+                <input type="hidden" name="id" value="{{job.id}}" />
+                <div class="row" style="margin:5%">
+                    <div class="col-5">
+                        <h6 style="text-align: center">I started in:</h6>
+                    </div>
+                    <div class="col">
+                        <select name="select_year" style="display: block; width:100%; margin: auto">
+                            {% for year in years %}
+                                <option>{{year}}</option>
+                            {% endfor %}
+                            <option value="{{years|last}}">Earlier than {{years|last}}</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn btn-outline-secondary" type="submit" name="position" value="1" style="width:100%;">Update My Position</button>
+            </form>
+            <br>
+        {% endif %}
+    </div>
+</div>

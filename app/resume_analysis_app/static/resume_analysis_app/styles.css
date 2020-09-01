@@ -24,11 +24,9 @@ h1 {
 }
 
 .warning{
-    background-color: #fff2e6;
-}
-
-.success{
-    background-color: #e6ffe6;
+    outline-color: #ff944d;
+    outline-style: solid;
+    outline-width: 2px;
 }
 
 button {

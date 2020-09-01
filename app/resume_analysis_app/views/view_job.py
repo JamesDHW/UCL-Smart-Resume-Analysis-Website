@@ -8,6 +8,18 @@ from .._app_functions import update_aggregate_personality
 
 def job_view(request):
 
+    if request.method == "GET" and request.GET.get('remove'):
+        try:
+            account = Account.objects.get(user=request.user)
+        except:
+            messages.warning(request, 'Could not remove position.')
+        else:
+            account.job = None
+            account.job_start = 0
+            account.save()
+            messages.success(request, 'Position removed.')
+
+    print(job_id := request.GET.get('id'))
     if (request.method == "GET") and (job_id := request.GET.get('id')):
         try:
             job = JobDescription.objects.get(id=job_id)

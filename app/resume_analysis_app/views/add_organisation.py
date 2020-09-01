@@ -29,7 +29,7 @@ def add_organisation(request):
                     return redirect('profile')
                 # Neither update nor delete - just display the org
                 elif not request.POST.get('update'):
-                    return render(request, 'resume_analysis_app/add_job.html', {'org': org})
+                    return render(request, 'resume_analysis_app/add_organisation.html', {'org': org})
                 messages.success(request, 'Organisation updated.')
         # No org_id provided give a blank org description
         else:
