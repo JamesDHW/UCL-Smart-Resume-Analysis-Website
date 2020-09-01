@@ -24,7 +24,7 @@
                 <input type="text" id="email" name="email" value="{{organisation.email_extension}}" style="width: 100%" required><br>
 
                 <label for="description">Company Description:</label><br>
-                <textarea id="description" rows="6" form="new_organisation" name="description" style="width: 100%" required>{{organisation.company_description}}</textarea>
+                <textarea id="description" rows="6" form="new_organisation" name="description" maxlength="300" style="width: 100%" required>{{organisation.company_description}}</textarea>
                 <br>
 
                 {% if organisation %}

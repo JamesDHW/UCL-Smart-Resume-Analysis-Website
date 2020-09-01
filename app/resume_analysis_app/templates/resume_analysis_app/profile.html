@@ -23,10 +23,11 @@
     <div class="container" style="margin:5px">
         <div class="row">
             {% if user.account.filename == "my_resume.pdf" %}
-            <div class="col box warning">
+            <div class="col box warning" style="margin-left:0px">
             {% else %}
-            <div class="col box">
+            <div class="col box" style="margin-left:0px">
             {% endif %}
+                <img src="../../static/resume_analysis_app/document-text-outline.svg" style="width:30%; display: block; margin-bottom:15px; margin-left: auto; margin-right: auto;">
                 <h6 style="text-align:center">Upload My Resume</h6>
                 <p>(Current File: {{ account.filename }})</p>
                 <form method="post" enctype="multipart/form-data">
@@ -43,10 +44,11 @@
                 </form>
             </div>
             {% if user.account.pers_big5 == "{}" %}
-            <div class="col box warning">
+            <div class="col box warning" style="margin-right:0px">
             {% else %}
-            <div class="col box">
+            <div class="col box" style="margin-right:0px">
             {% endif %}
+                <img src="../../static/resume_analysis_app/body-outline.svg" style="width:30%; display: block; margin-bottom:15px; margin-left: auto; margin-right: auto;">
                 <h6 style="text-align:center">Let Us Get To Know More About You...</h6>
                 <br><br>
                 <form method="get" action="{% url 'interview' %}">
