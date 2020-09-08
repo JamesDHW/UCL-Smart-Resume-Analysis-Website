@@ -1,17 +1,19 @@
 from django.urls import path
 
-from .views._core_site_views import home, search_results, register
+from .views._core_site_views import home, search_results, register, search_API
 from .views.add_job import add_job
 from .views.add_organisation import add_organisation
 from .views.add_qualification import add_qualification
 from .views.applicant_dash import applicant_dash
 from .views.profile import profile
+from .views.view_custom_search import view_custom_search
 from .views.view_job import job_view
 from .views.view_organisation import organisation_view
 from .views.view_owned_organisations import owned_oragnisations
 from .views.view_posted_positions import posted_positions
 from .views.view_question import question_view
 
+from ._app_functions import custom_search
 
 urlpatterns = [
     path('', home, name='home'),
@@ -20,6 +22,7 @@ urlpatterns = [
     path('add_qualification/', add_qualification, name='add_qualification'),
     path('dashboard/', applicant_dash, name='dash'),
     path('interview/', question_view, name='interview'),
+    path('candidates/', view_custom_search, name='custom_search'),
     path('job/', job_view, name='job_view'),
     path('organisation/', organisation_view, name='organisation_view'),
     path('my_organisations/', owned_oragnisations, name='owned_organisations'),
@@ -27,4 +30,5 @@ urlpatterns = [
     path('profile/', profile, name='profile'),
     path('register/', register, name="register"),
     path('search/', search_results, name='search'),
+    path('search_API/', search_API),
 ]

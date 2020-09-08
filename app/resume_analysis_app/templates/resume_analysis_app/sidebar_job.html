@@ -1,7 +1,7 @@
 <div class="col-md-4" style="margin-top: 150px; padding: 3px;">
     <div class="container box">
         {% if user.account.job == job %}
-            <h3 style="text-align: center; padding: 5%">This Is Your Position at {{job.organisation}}</h3>
+            <h3 style="text-align: center; padding: 5%">This is Your Position at {{job.organisation}}</h3>
             <form method="get">
                 <input type="hidden" name="id" value="{{job.id}}"/>
                 <input type="hidden" name="remove" value="1"/>
@@ -11,7 +11,7 @@
             </form>
         {% else %}
             <h3 style="text-align: center; padding: 5%">Is This Your Position at {{job.organisation}}?</h3>
-            <form method="get" action="">
+            <form>
                 <input type="hidden" name="id" value="{{job.id}}" />
                 <div class="row" style="margin:5%">
                     <div class="col-5">

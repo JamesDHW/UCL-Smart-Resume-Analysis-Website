@@ -10,7 +10,7 @@ from .._app_functions import extract_insights, update_applicants
 
 @login_required
 def add_job(request):
-    if request.method == "POST":
+    if request.method == "POST" and request.user.is_authenticated:
         if job_id := request.POST.get('id'):
             try:
                 job = JobDescription.objects.get(id=job_id)
@@ -19,7 +19,7 @@ def add_job(request):
                 return redirect('profile')
             else:
                 # Check credentials to edit
-                if job.author != request.user:
+                if job.author != request.user or request.user.account.organisation == None:
                     messages.warning(request, 'Invalid credentials.')
                     return redirect('profile')
                 # If credentials pass and we want to delete
@@ -61,6 +61,8 @@ def add_job(request):
 
         messages.success(request, 'Job updated.')
         return redirect('profile')
+    elif not request.user.is_authenticated:
+        return redirect('home')
     # Just get the page with the form on
     else:
         return render(request, 'resume_analysis_app/add_job.html')

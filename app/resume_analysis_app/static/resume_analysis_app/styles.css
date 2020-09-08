@@ -1,6 +1,13 @@
-html,body {
-    height: 100%;
+@font-face {
+    font-family: 'Comfortaa';
+    src: url("Comfortaa.ttf") format("truetype");
 }
+
+html,body {
+    height: 100vh;
+    font-family: 'Comfortaa';
+}
+
 
 div {
     width; 100%;
@@ -31,9 +38,10 @@ h1 {
 
 .scroll{
     height: 100vh;
-    overflow: auto;
+    overflow-y: scroll;
+    overflow-x: hidden;
     padding-top:150px;
-    padding-bottom:150px
+    padding-bottom:150px;
 }
 
 .scroll::-webkit-scrollbar {

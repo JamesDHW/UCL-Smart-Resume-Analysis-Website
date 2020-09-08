@@ -12,16 +12,22 @@
     </div>
     <br>
     <div class="container box">
-        <form method="post" id="new_organisation">
+        <form method="post" id="new_organisation" enctype="multipart/form-data">
             {% csrf_token %}
             <fieldset>
                 <input type="hidden" name="owner" value="{{user}}">
 
                 <label for="name">Organisation Name:</label><br>
-                <input type="text" id="name" name="name" value="{{organisation.name}}" style="width: 100%" required><br>
+                <input type="text" id="name" name="name" value="{{organisation.name}}" style="width: 100%" required><br><br>
+
+                <label for="file" class="btn mt-1 btn-outline-secondary">Select Company Logo</label>
+                <input style="display:none" id="file" type="file" name="logo" required><br><br>
+
+                <label for="website">Company Website:</label><br>
+                <input type="text" id="website" name="website" value="{{organisation.website}}" style="width: 100%" required><br><br>
 
                 <label for="email">Corporate Email Extension:</label><br>
-                <input type="text" id="email" name="email" value="{{organisation.email_extension}}" style="width: 100%" required><br>
+                <input type="text" id="email" name="email" value="{{organisation.email_extension}}" style="width: 100%" required><br><br>
 
                 <label for="description">Company Description:</label><br>
                 <textarea id="description" rows="6" form="new_organisation" name="description" maxlength="300" style="width: 100%" required>{{organisation.company_description}}</textarea>
@@ -32,15 +38,15 @@
                     <input type="hidden" name="id" value="{{organisation.id}}">
                 {% endif %}
 
-                <input class="btn btn-outline-secondary" type="submit" style="width: 100%; margin-top: 5%;">
+                <input class="btn btn-outline-success" type="submit" style="width: 100%; margin-top: 5%;">
             </fieldset>
         </form>
-        {% if job %}
+        {% if organisation %}
             <form method="post" action="{% url 'add_job' %}">
                 {% csrf_token %}
                 <input type="hidden" name="delete" value="true">
-                <input type="hidden" name="id" value="{{job.id}}">
-                <input type="submit" value="Delete Posting" style="width: 100%; margin-top: 5%;">
+                <input type="hidden" name="id" value="{{organisation.id}}">
+                <input class="btn btn-outline-danger" type="submit" value="Delete Organisation" style="width: 100%; margin-top: 5%;">
             </form>
         {% endif %}
 

@@ -4,8 +4,20 @@
     {% if applicant %}
         <div class="container box">
             <div class="row">
-                <h1>Candidate Dashboard</h1>
+                <h1>Candidate Insights</h1>
             </div>
+            {% if search %}
+<!--                <button class="btn btn-outline-danger" onclick="window.history.back()"-->
+<!--                style="display: block; margin-left: auto; margin-right: auto; margin-top: 30px"-->
+<!--                >Back To Search Results</button>-->
+            {% else %}
+                <form method="get">
+                    <input type="hidden" name="job_id" value="{{job.id}}">
+                    <input type="hidden" name="remove_app" value="{{applicant.account.user.id}}">
+                    <input type="submit" value="Remove Candidate From Shortlist" class="btn btn-outline-danger"
+                           style="display: block; margin-left: auto; margin-right: auto; margin-top: 30px">
+                </form>
+            {% endif %}
         </div>
         <div class="container box">
             <div class="row">
@@ -137,7 +149,7 @@
     {% else %}
         <div class="container box">
             <div class="row">
-                <h1>Candidate Dashboard</h1>
+                <h1>Position Dashboard</h1>
             </div>
         </div>
         <div class="container box">
@@ -205,18 +217,58 @@
                     </div>
                 {% endfor %}
             </div>
-            <div class="row" style="justify-content: left !important">
-                <div class="col-5"><h5 style="display:flex; align-items: center; height:100%">Position Keywords:</h5></div>
+            <div class="row">
                 <div class="col">
-                    <form method="get" style="min-width:100%;">
-                        <div class="input-group">
-                          <input type="text" name="add_kw" class="form-control" placeholder="Add Keyword">
-                          <input type="hidden" name="job_id" value="{{job.id}}">
-                          <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="submit">Add</button>
-                          </div>
+                    <h5>Must-Have Keywords:</h5>
+                </div>
+            </div>
+            <div class="row mt-3" style="margin-bottom:30px">
+                {% if job.keywords_req %}{% else %}<p>No Keywords Selected as Required</p>{% endif %}
+                {% for keyword in job.keywords_req %}
+                    <div class="d-flex flex-md-row">
+                        <div class="row" style="outline-style: solid; outline-width: 1px; margin: 5px; padding:5px; background:#eee">
+                            {{keyword}}
+                            <a href="?job_id={{job.id}}&remove_req_kw={{keyword}}" onclick="this.parentNode.submit()" style="margin-left:10px">X</a>
                         </div>
-                    </form>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="row" style="justify-content: left !important">
+                <div class="col">
+                    <h5>Position Keywords:</h5>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <form method="get" style="min-width:100%;">
+                            <div class="input-group">
+                              <input type="text" name="add_kw" class="form-control" placeholder="Add Keyword">
+                              <input type="hidden" name="job_id" value="{{job.id}}">
+                              <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="submit">Add</button>
+                              </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <div class="dropdown" style="width:100%; margin-top:5px;">
+                            <button class="btn btn-muted dropdown-toggle" style="width:100%" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Action For Selected Keywords
+                            </button>
+                            <div class="dropdown-menu" style="width: 100%" aria-labelledby="dropdownMenuButton">
+                                <form method="get" id="Action">
+                                    <input type="hidden" name="job_id" value="{{job.id}}">
+                                    <input type="submit" name="req_kws" value="Make Selected Keywords Required"
+                                           onclick="this.parentNode.submit()" class="dropdown-item" style="color: var(--success)">
+                                    <input type="submit" name="remove_kws" value="Remove Selected Keywords"
+                                           onclick="this.parentNode.submit()" class="dropdown-item" style="color: var(--danger)">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="justify-content: left !important">
+                <div class="col" style="margin:auto; margin-right:5px">
                 </div>
             </div>
             <div class="row mt-3">
@@ -224,7 +276,7 @@
                     <div class="d-flex flex-md-row">
                         <div class="row" style="outline-style: solid; outline-width: 1px; margin: 5px; padding:5px; background:#eee">
                             {{keyword}}
-                            <a href="?job_id={{job.id}}&remove_kw={{keyword}}" onclick="this.parentNode.submit()" style="margin-left:10px">X</a>
+                            <input form="Action" type="checkbox" name="check" value="{{keyword}}" style="margin:auto; margin-left:10px">
                         </div>
                     </div>
                 {% endfor %}

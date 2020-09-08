@@ -1,30 +1,42 @@
 <div class="col fixed" style="padding-top:150px">
-    <div class="container box">
-        <h3 style="text-align: center">Current Position</h3>
-        <br>
-        {% if user.account.job %}
-            <div class="col">
-                <a href="{% url 'job_view' %}?id={{user.account.job.id}}"><h5>{{user.account.job.title}}</h5></a>
-                <h6 style="margin:0px">£{{user.account.job.salary}} - {{user.account.job.location}}</h6>
-                <p>Since {{user.account.job_start}}</p>
-            </div>
-        {% else %}
-            <p>No Position Found</p>
-        {% endif %}
-        <a href="{% url 'organisation_view' %}?id={{user.account.organisation.id}}">
-            <h3 style="text-align: center">{{user.account.organisation}}</h3>
-        </a>
-        <br>
-        <p style="text-align:justify">{{user.account.organisation.company_description}}</p>
-    </div>
+    {% if user.account.organisation %}
+        <div class="container box">
+            <h3 style="text-align: center; margin-bottom:50px">Current Position</h3>
+            <a href="{% url 'organisation_view' %}?id={{user.account.organisation.id}}">
+                <img src="{{user.account.organisation.logo.url}}" style="width:50%; display: block; margin-bottom:15px; margin-left: auto; margin-right: auto;">
+                <h5 style="text-align: center">Company Page</h5>
+            </a>
+            <br>
+            {% if user.account.job %}
+                <div class="col">
+                    <a href="{% url 'job_view' %}?id={{user.account.job.id}}"><h5>{{user.account.job.title}}</h5></a>
+                    <h6 style="margin:0px">{{user.account.job.location}}</h6>
+                    <p>Since {{user.account.job_start}}</p>
+                </div>
+            {% else %}
+                <p>No Position Found</p>
+            {% endif %}
+            <br>
+        </div>
+    {% endif %}
     <div class="container box">
         <a href="{% url 'posted_positions' %}">
-            <h3 style="text-align: center">Posted Positions</h3>
+            <div class="row">
+                <div class="col-3 m-2">
+                    <img src="../../static/resume_analysis_app/position.svg" style="width:100%; margin-left: auto; margin-right: auto;">
+                </div>
+                <div class="col mt-4"><h4 style="text-align: center">Positions</h4></div>
+            </div>
         </a>
     </div>
     <div class="container box">
         <a href="{% url 'owned_organisations' %}">
-            <h3 style="text-align: center">My Organisations</h3>
+            <div class="row">
+                <div class="col-3 m-2">
+                    <img src="../../static/resume_analysis_app/organisation.svg" style="width:100%; margin-left: auto; margin-right: auto;">
+                </div>
+                <div class="col mt-4"><h4 style="text-align: center">Organisations</h4></div>
+            </div>
         </a>
     </div>
 </div>

@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.core import serializers
+from django.http import HttpResponse
 
 from ..forms import RegistrationForm
 
 from ..models import JobDescription, Organisation
-
+from .._app_functions import custom_search
 
 def home(request):
     jobs = JobDescription.objects.all().order_by('-id')[:10]
@@ -45,7 +47,8 @@ def register(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             new_user = form.save()
-            if (e := request.POST.get('email')) and (org := Organisation.objects.filter(email_extension=e.split('@')[-1])):
+            if (e := request.POST.get('email')) and (org := Organisation.objects.filter(email_extension=e.split('@')[-1].lower())):
+                print('ext:', e, 'org:', org)
                 if len(org.all()) == 1:
                     new_user.account.organisation = org.all()[0]  # Set organisation
                     new_user.account.save()
@@ -54,3 +57,10 @@ def register(request):
     else:
         form = RegistrationForm()
     return render(request, 'resume_analysis_app/register.html', {'form': form})
+
+
+def search_API(request):
+    if request.method == 'GET':
+        cat = request.GET.getlist('categories')
+        kws = request.GET.getlist('keywords')
+        return HttpResponse(serializers.serialize('json', custom_search(cat, kws)), content_type='application/json')

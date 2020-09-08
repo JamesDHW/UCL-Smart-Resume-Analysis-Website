@@ -1,6 +1,3 @@
-import json
-
-import requests
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
@@ -10,7 +7,18 @@ from ..models import Organisation
 
 @login_required
 def add_organisation(request):
-    if request.method == "POST":
+    def update_user_org(usr):
+        email_ext = usr.email.split('@')[-1]
+        try:
+            new_org = Organisation.objects.get(email_extension=email_ext)
+        except:
+            pass
+        else:
+            usr.account.organisation = new_org
+            usr.account.save()
+            messages.success(request, 'Account added to organisation.')
+
+    if request.method == "POST" and request.user.is_authenticated:
         if org_id := request.POST.get('id'):
             try:
                 org = Organisation.objects.get(id=org_id)
@@ -25,25 +33,36 @@ def add_organisation(request):
                 # If credentials pass and we want to delete
                 elif request.POST.get('delete'):
                     org.delete()
-                    messages.success(request, 'Job deleted.')
+                    messages.success(request, 'Organisation deleted.')
                     return redirect('profile')
                 # Neither update nor delete - just display the org
                 elif not request.POST.get('update'):
                     return render(request, 'resume_analysis_app/add_organisation.html', {'org': org})
-                messages.success(request, 'Organisation updated.')
         # No org_id provided give a blank org description
         else:
             org = Organisation()
             org.owner = request.user
-            messages.success(request, 'Organisation created.')
 
         # Now POST request is to save or update a org
-        org.name = request.POST.get('name')
-        org.email_extension = request.POST.get('email')
-        org.company_description = request.POST.get('description')
+        if len(request.FILES) == 0:
+            messages.warning(request, 'No logo selected')
+        else:
+            logo = request.FILES['logo']
+            if logo.name[-4:] == '.png':
+                org.logo = logo
+                org.name = request.POST.get('name')
+                org.email_extension = request.POST.get('email').lower()
+                org.company_description = request.POST.get('description')
+                org.website = request.POST.get('website')
+                org.save()
+                update_user_org(request.user)
+                messages.success(request, 'Organisation saved.')
+            else:
+                messages.warning(request, 'Incorrect logo file type (must be .png).')
 
-        org.save()
         return redirect('profile')
+    elif not request.user.is_authenticated:
+        return redirect('home')
     # Just get the page with the form on
     else:
         context = {}

@@ -36,7 +36,7 @@
                     <input type="hidden" name="id" value="{{job.id}}">
                 {% endif %}
 
-                <input class="btn btn-outline-secondary" type="submit" style="width: 100%; margin-top: 5%;">
+                <input class="btn btn-outline-success" type="submit" style="width: 100%; margin-top: 5%;">
             </fieldset>
         </form>
         {% if job %}
@@ -44,7 +44,7 @@
                 {% csrf_token %}
                 <input type="hidden" name="delete" value="true">
                 <input type="hidden" name="id" value="{{job.id}}">
-                <input type="submit" value="Delete Posting" style="width: 100%; margin-top: 5%;">
+                <input class="btn btn-outline-danger" type="submit" value="Delete Posting" style="width: 100%; margin-top: 5%;">
             </form>
         {% endif %}
 

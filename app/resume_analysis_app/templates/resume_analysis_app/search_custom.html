@@ -1,0 +1,65 @@
+{% extends 'resume_analysis_app/_site_frame.html' %}
+{% block content %}
+
+    <div class="container box">
+        <div class="row">
+            <h1>Candidate Search</h1>
+        </div>
+    </div>
+
+    <div class="container box">
+        <form id="search">
+            <input type="hidden" value="{{job.id}}" name="job">
+            <div class="row"><h5 style="text-align: left; width:100%">Resume Categories</h5></div>
+            {% for cat in cats %}
+                <div class="row">
+                    <select name="categories" class="selectpicker form-control" data-live-search="true">
+                        {% if cat != 'Category 1' and cat != 'Category 3' and cat != 'Category 3' %}
+                            <option>Category {{forloop.counter}}</option>
+                            <option selected="true">{{cat}}</option>
+                        {% else %}
+                            <option selected="true">Category {{forloop.counter}}</option>
+                        {% endif %}
+                        {% for category in categories %}
+                            <option value="{{category}}">{{category}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            {% endfor %}
+            <div class="row mt-4"><h5 style="text-align: left; width:100%">Resume Keywords</h5></div>
+            <textarea id="keywords" rows="3" form="search" name="keywords"
+                      placeholder="First Keyword, Second Keyword, ..." style="width: 100%"
+            >{% if kws %}{{kws}}{% endif %}</textarea>
+            <input class="btn btn-outline-secondary w-100" type="submit" value="Search">
+        </form>
+    </div>
+
+    <div class="container box" style="padding: 2%; margin-top: 50px">
+        <h4>Candidates</h4>
+    </div>
+    {% for candidate in candidates %}
+        <div class="container box" style="padding:10px">
+            <div class="row">
+                <div class="col m-3">
+                    <h5>{{ candidate }}</h5>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <a class="btn btn-outline-secondary" style="width: 80%;"
+                       href="{% url 'dash' %}?job_id={{job.id}}&search={{candidate.user.id}}">View Account</a>
+                    </div>
+                    <div class="row">
+                        <a class="btn btn-outline-success" style="width: 80%;"
+                       href="{% url 'custom_search' %}?job={{job.id}}&categories={{cats.0}}&categories={{cats.1}}&categories={{cats.2}}&keywords={{kws}}&add={{candidate.user.id}}">Add To Shortlist</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+
+<script type="text/javascript">
+    $('.selectpicker').selectpicker();
+</script>
+
+{% endblock content %}

@@ -6,9 +6,11 @@ from django.utils import timezone
 class Organisation(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, default=1, related_name='owner')
     name = models.CharField(max_length=50)
+    website = models.CharField(max_length=50, default="https://www.")
     email_extension = models.CharField(max_length=50)   # e.g. gmail.com, ucl.ac.uk (without the @)
     company_description = models.TextField(default="")
     employees = models.ManyToManyField(User, blank=True)
+    logo = models.FileField(default='logos/_.svg', upload_to='logos')
 
     def __str__(self):
         return self.name
@@ -31,6 +33,7 @@ class JobDescription(models.Model):
 
     # Insights from IBM about resume
     keywords = models.TextField(default='{}')
+    keywords_req = models.TextField(default='[]')
     concepts = models.TextField(default='{}')
     category1 = models.CharField(max_length=100, default='None')
     category2 = models.CharField(max_length=100, default='None')

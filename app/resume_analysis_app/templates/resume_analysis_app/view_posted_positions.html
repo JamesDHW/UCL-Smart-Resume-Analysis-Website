@@ -3,7 +3,7 @@
 
     <div class="container box" style="padding: 2%">
         <div class="row">
-            <div class="col"><h4>Positions Posted By Me</h4></div>
+            <div class="col"><h4>Positions Posted By {{user.first_name}}</h4></div>
             <div class="col-1" style="margin-right:20px">
                 <form method="get" action="{% url 'add_job' %}">
                     <button class="btn btn-outline-secondary" type="submit">Add</button>

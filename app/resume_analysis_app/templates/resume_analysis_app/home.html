@@ -7,7 +7,7 @@
                 <img src="../../static/resume_analysis_app/logo.png" style="width:100%">
             </div>
             <div class="col">
-                <h1>Quandary PRO-totype</h1>
+                <h1>Quandary PRO</h1>
                 <p style="text-align: center; margin-bottom: 0px; font-size:11x;">Making Smart Recruitment Decisions.</p>
             </div>
         </div>
@@ -27,18 +27,18 @@
     </div>
 
     {% for job in jobs %}
-    <div class="container box">
-        <div class="row">
-            <div class="col">
-                <a href="{% url 'job_view' %}?id={{job.id}}"><h3>{{job.title}}</h3></a>
-                <h5>£{{job.salary}} - {{job.location}}</h5>
-            </div>
-            <div class="col" style="text-align: right !important">
-                <a href="{% url 'organisation_view' %}?id={{job.organisation.id}}">
-                    <h3>{{job.organisation}}</h3>
-                </a>
+        <div class="container box">
+            <div class="row">
+                <div class="col">
+                    <a href="{% url 'job_view' %}?id={{job.id}}"><h3>{{job.title}}</h3></a>
+                    <h5>£{{job.salary}} - {{job.location}}</h5>
+                </div>
+                <div class="col" style="height:100%">
+                    <a href="{% url 'organisation_view' %}?id={{job.organisation.id}}">
+                        <img src="{{job.organisation.logo.url}}" style="width:40%; display: block; margin: auto; margin-right: 30px;">
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
     {% endfor %}
 {% endblock content %}

@@ -26,7 +26,9 @@
             <div class="row">
                 <div class="col">
                     <a href="{% url 'organisation_view' %}?id={{organisation.id}}">
-                        <h3>{{organisation.name}}</h3>
+                        <div class="row">
+                            <img src="{{organisation.logo.url}}" style="width:20%; display: block; margin-left: 30px; margin-right: auto;">
+                        </div>
                     </a>
                 </div>
             </div>
@@ -45,9 +47,9 @@
                     <a href="{% url 'job_view' %}?id={{job.id}}"><h3>{{job.title}}</h3></a>
                     <h5>£{{job.salary}} - {{job.location}}</h5>
                 </div>
-                <div class="col" style="text-align: right !important">
+                <div class="col" style="height:100%">
                     <a href="{% url 'organisation_view' %}?id={{job.organisation.id}}">
-                        <h3>{{job.organisation}}</h3>
+                        <img src="{{job.organisation.logo.url}}" style="width:40%; display: block; margin: auto; margin-right: 30px;">
                     </a>
                 </div>
             </div>

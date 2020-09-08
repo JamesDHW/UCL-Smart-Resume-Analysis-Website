@@ -19,7 +19,6 @@ def job_view(request):
             account.save()
             messages.success(request, 'Position removed.')
 
-    print(job_id := request.GET.get('id'))
     if (request.method == "GET") and (job_id := request.GET.get('id')):
         try:
             job = JobDescription.objects.get(id=job_id)
@@ -28,8 +27,11 @@ def job_view(request):
             return redirect('home')
         # Apply to a job
         if request.GET.get('apply'):
-            job.applicants.add(request.user)
-            messages.success(request, 'Applied for position.')
+            if request.user.account.keywords != '{}' and request.user.account.pers_big5 != '{}':
+                job.applicants.add(request.user)
+                messages.success(request, 'Applied for position.')
+            else:
+                messages.warning(request, 'Please complete your profile before applying to jobs.')
         # Identified this job as user's current position
         if request.GET.get('position') and (since := request.GET.get('select_year')):
             account = Account.objects.get(user=request.user)

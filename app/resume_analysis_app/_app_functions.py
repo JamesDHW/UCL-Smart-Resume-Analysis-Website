@@ -1,9 +1,11 @@
 import requests
 import json
+import operator
 from random import randint
 from statistics import mean
 from datetime import datetime
-
+from django.db.models import Q
+from functools import reduce
 
 # Option to discount insights below a certain relevance
 keyword_relevance_boundary = 0
@@ -11,7 +13,7 @@ category_score_boundary = 0
 concept_relevance_boundary = 0
 
 # Lowest number of keywords required to consider an applicant to be recommended
-kw_rec_boundary = 3
+kw_req_boundary = 3
 
 
 def create_CVs():
@@ -122,6 +124,7 @@ def extract_insights(text):
 def update_applicants(job):
     print('\nUPDATING APPLICANTS')
     # For each category search for 1 category above most specific category
+    # (unless lower specificity category)
     cat1 = job.category1.split('/')
     if len(cat1)>3: cat1 = "/".join(cat1[:-1])
     else: cat1 = "/".join(cat1)
@@ -174,17 +177,25 @@ def update_applicants(job):
     # Sort by number of matches found
     cat_matches = {k: v for k, v in sorted(cat_matches.items(), reverse=True, key=lambda item: item[1])}
     cat_matches = list(cat_matches.keys())
+    print('matches:', cat_matches)
 
-    i, job_kws = 0, ' '.join(job.keywords.keys()).lower()
+    i, job_kws = 0, job.keywords_req
     while i != len(cat_matches):
-        if cat_matches[i].keywords == '':
+        # Remove if no keywords - no resume uploaded!
+        if cat_matches[i].keywords == '{}':
             del cat_matches[i]
             continue
-        # If not enough keywords, eliminate from recommendations
-        if len([kw for kw in json.loads(cat_matches[i].keywords).keys() if kw.lower() in job_kws]) < kw_rec_boundary:
+        # Remove if no personality - interview no answered!
+        if cat_matches[i].pers_big5 == '{}':
             del cat_matches[i]
-        else:
-            i += 1
+            continue
+        # If candidate doesn't have every required keyword
+        candidate_kws = ' '.join(json.loads(cat_matches[i].keywords).keys())
+        for kw in job_kws:
+            if kw not in candidate_kws:
+                del cat_matches[i]
+                break
+        else: i += 1
 
     job.recommended.clear()
     for match in cat_matches:
@@ -247,3 +258,36 @@ def update_aggregate_personality(job):
     # return to dict
     job.keywords = json.loads(job.keywords)
     job.concepts = json.loads(job.concepts)
+
+
+def custom_search(categories, keywords, job=None):
+    """
+    Allows for search for all given key terms.
+    :param categories: ['LAYER1/LAYER2/LAYER3', 'LAYER1']
+    :param keywords: ['kw1', 'kw2', 'kw3']
+    :return: list of candidates with the required keywords.
+    """
+    candidates = []
+    if len(categories) != 0:
+        for cat in categories:
+            # Exclude those with jobs already
+            candidates.append(Account.objects.filter(
+                category1__contains=cat).exclude(job__isnull=False) | Account.objects.filter(
+                category2__contains=cat).exclude(job__isnull=False) | Account.objects.filter(
+                category3__contains=cat).exclude(job__isnull=False))
+        # Reduce dimensionality of list
+        candidates = [x for ls in candidates for x in ls]
+        # If x categories provided candidate must be returned by x queries so appear x times in the list
+        candidates = [x for x in candidates if candidates.count(x) == len(categories)]
+        # Filter out where keywords not present
+        for kw in keywords:
+            candidates = [x for x in candidates if kw in x.keywords]
+
+    # No categories selected, search for keywords
+    elif len(keywords) != 0:
+        candidates = Account.objects.filter(reduce(operator.and_, (Q(keywords__icontains='"'+x+'"') for x in keywords)))
+
+    # Candidates got, now sort
+    if job:
+        candidates = [x for x in candidates if x.user not in job.removed.all()]
+    return candidates
