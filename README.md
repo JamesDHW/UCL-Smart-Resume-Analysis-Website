@@ -2,4 +2,4 @@
 
 Using IBM's Watson and Node RED to analyse resumes to free up recruiter's time.
 
-[![Watch the Demo](https://youtu.be/MbyyFSLOMTQ)
+[![Demo](https://img.youtube.com/vi/MbyyFSLOMTQ/0.jpg)](https://www.youtube.com/watch?v=MbyyFSLOMTQ)
